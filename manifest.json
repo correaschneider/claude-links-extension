@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Claude Links",
+  "version": "0.3.0",
+  "description": "Troca textos configuráveis (regex) por links que abrem uma sessão no Claude Desktop.",
+  "permissions": ["storage", "activeTab"],
+  "action": {
+    "default_title": "Claude Links",
+    "default_popup": "options.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["defaults.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Claude Links — config</title>
+<style>
+  :root { --bg:#fff; --fg:#1f2328; --muted:#656d76; --card:#f6f8fa; --line:#d0d7de; --accent:#2563eb; --danger:#b91c1c; --ok:#15803d; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#1e1f22; --fg:#e6e6e6; --muted:#9aa0a6; --card:#2b2d31; --line:#3f4147; --accent:#5b8def; --danger:#f87171; --ok:#4ade80; }
+  }
+  * { box-sizing: border-box; }
+  body { font: 14px system-ui, sans-serif; background: var(--bg); color: var(--fg); margin: 0; padding: 16px; min-width: 640px; }
+  header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  h1 { font-size: 18px; margin: 0; }
+  [hidden] { display: none !important; }
+  .list { list-style: none; margin: 0; padding: 0; }
+  .item { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; margin-bottom: 8px; cursor: pointer; }
+  .item:hover { border-color: var(--accent); }
+  .item .host { font-weight: 600; flex: 1; }
+  .item .count { color: var(--muted); font-size: 12px; }
+  .empty { color: var(--muted); padding: 16px 0; }
+  .row { display: grid; grid-template-columns: 1.4fr 1.4fr 1fr auto; gap: 6px; margin-bottom: 6px; }
+  .labels { font-size: 12px; color: var(--muted); }
+  label.host-label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  input { width: 100%; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--fg); font: 13px ui-monospace, monospace; }
+  input.invalid { border-color: var(--danger); }
+  button { padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--fg); cursor: pointer; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  button.plus { width: 32px; height: 32px; padding: 0; font-size: 20px; line-height: 1; border-radius: 50%; }
+  button.danger { color: var(--danger); }
+  .tip { cursor: help; border-bottom: 1px dotted; }
+  .bar { display: flex; gap: 8px; align-items: center; margin-top: 12px; }
+  .bar .spacer { flex: 1; }
+  #status.err { color: var(--danger); } #status.ok { color: var(--ok); }
+  .hint { color: var(--muted); font-size: 12px; margin: 10px 0 0; }
+  .host-field { margin-bottom: 12px; }
+</style>
+
+<!-- Listagem -->
+<section id="view-list">
+  <header>
+    <h1>Claude Links</h1>
+    <button id="add-page" class="plus primary" title="Add page">+</button>
+  </header>
+  <ul id="list" class="list"></ul>
+  <p id="empty" class="empty" hidden>Nenhuma página. Clique em + para adicionar.</p>
+</section>
+
+<!-- Formulário de uma página -->
+<section id="view-form" hidden>
+  <header>
+    <h1 id="form-title">Página</h1>
+    <button id="back">← Voltar</button>
+  </header>
+  <div class="host-field">
+    <label class="host-label" for="host">Página (domínio)</label>
+    <input id="host" placeholder="discord.com">
+  </div>
+  <div class="row labels">
+    <span>Chave (regex)</span>
+    <span>Valor (vai como q; use $1, $2…)</span>
+    <span>Folder <span class="tip" title="Opcional. Se ficar vazio, o link não leva folder e o Claude Desktop abre na pasta padrão.">(?)</span></span>
+    <span></span>
+  </div>
+  <div id="reps"></div>
+  <button id="add-rep">+ Substituição</button>
+  <div class="bar">
+    <button id="del-page" class="danger">Deletar página</button>
+    <span class="spacer"></span>
+    <span id="status"></span>
+    <button id="save" class="primary">Salvar</button>
+  </div>
+  <p class="hint">Começar o valor com “/” não funciona: o Claude Desktop troca a barra. Peça a skill em texto, ex.: “Rode a skill X na Y”.</p>
+</section>
+
+<template id="tpl-rep">
+  <div class="row rep">
+    <input class="match" placeholder="/(triagem)\s+(TASK-\d+)">
+    <input class="q" placeholder="Rode a skill $1 na $2">
+    <input class="folder" placeholder="(pasta padrão)">
+    <button class="danger del-rep" title="Deletar substituição">✕</button>
+  </div>
+</template>
+
+<script src="defaults.js"></script>
+<script src="options.js"></script>
