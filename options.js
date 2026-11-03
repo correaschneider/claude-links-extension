@@ -205,6 +205,8 @@ function openForm(index, host = '') {
   (p.replacements.length ? p.replacements : [{}]).forEach(addRep);
   $('del-page').hidden = index < 0;
   show('', true);
+  pendingMerge = null;
+  $('merge').hidden = true;
   $('view-list').hidden = true;
   $('view-form').hidden = false;
   (index >= 0 || host ? $('reps').querySelector('.match') : $('host')).focus();
@@ -245,7 +247,52 @@ async function activeHost() {
 
 // ---- Eventos ----
 
-$('add-page').addEventListener('click', async () => openForm(-1, await activeHost()));
+// Índice da página com esse domínio, ignorando a que está sendo editada.
+function findPage(host, except = -1) {
+  return config.findIndex((p, i) => i !== except && p.page === host);
+}
+
+// Junta as substituições de `extra` em `target`, sem repetir regra igual.
+function mergeInto(target, extra) {
+  const key = (r) => `${r.match}\u0000${r.q}\u0000${r.folder || ''}`;
+  const seen = new Set(target.replacements.map(key));
+  for (const r of extra.replacements) {
+    if (!seen.has(key(r))) {
+      target.replacements.push(r);
+      seen.add(key(r));
+    }
+  }
+  return target;
+}
+
+// Une páginas com o mesmo domínio (salvas antes desta validação existir).
+function dedupe(list) {
+  const out = [];
+  for (const p of list) {
+    const existing = out.find((o) => o.page === p.page);
+    if (existing) mergeInto(existing, p);
+    else out.push({ ...p, replacements: [...(p.replacements || [])] });
+  }
+  return out;
+}
+
+// O pedido de permissão precisa sair no clique, antes de qualquer await.
+// Não esperamos a resposta para salvar: em alguns sistemas o popup fecha
+// quando o diálogo de permissão abre. O background registra o script
+// quando a permissão chega.
+function requestPermission(host) {
+  chrome.permissions.request({ origins: originsFor(host) }).catch(() => {});
+}
+
+let pendingMerge = null; // página do formulário esperando o clique em Mesclar
+
+$('add-page').addEventListener('click', async () => {
+  const host = await activeHost();
+  const existing = host ? findPage(host) : -1;
+  // Domínio já cadastrado: abre a página dele em vez de criar outra.
+  if (existing >= 0) openForm(existing);
+  else openForm(-1, host);
+});
 $('add-rep').addEventListener('click', () => addRep());
 $('back').addEventListener('click', showList);
 
@@ -256,15 +303,30 @@ $('save').addEventListener('click', () => {
   } catch (e) {
     return show(t('notSaved', e.message), false);
   }
-  // O pedido de permissão precisa sair no clique, antes de qualquer await.
-  // Não esperamos a resposta para salvar: em alguns sistemas o popup fecha
-  // quando o diálogo de permissão abre. O background registra o script
-  // quando a permissão chega.
-  chrome.permissions.request({ origins: originsFor(page.page) }).catch(() => {});
+  // Outro cadastro com o mesmo domínio: não duplica, oferece mesclar.
+  if (findPage(page.page, editing) >= 0) {
+    pendingMerge = page;
+    $('merge').hidden = false;
+    return show(t('pageExists', page.page), false);
+  }
+  requestPermission(page.page);
   const previous = editing >= 0 ? config[editing].page : null;
   if (editing >= 0) config[editing] = page;
   else config.push(page);
   if (previous && previous !== page.page) releaseIfUnused(previous);
+  persist(showList);
+});
+
+$('merge').addEventListener('click', () => {
+  if (!pendingMerge) return;
+  const page = pendingMerge;
+  requestPermission(page.page);
+  const target = findPage(page.page, editing);
+  mergeInto(config[target], page);
+  if (editing >= 0) {
+    const [removed] = config.splice(editing, 1);
+    if (removed.page !== page.page) releaseIfUnused(removed.page);
+  }
   persist(showList);
 });
 
@@ -285,6 +347,7 @@ translate(document);
 document.documentElement.lang = chrome.i18n.getUILanguage();
 
 chrome.storage.sync.get({ config: DEFAULT_CONFIG }, (data) => {
-  config = data.config;
-  showList();
+  config = dedupe(data.config);
+  if (config.length !== data.config.length) persist(showList);
+  else showList();
 });

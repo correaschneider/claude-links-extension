@@ -131,6 +131,14 @@ STRINGS = {
     'errInvalidKey': {'en': 'invalid regex in the key', 'pt_BR': 'regex inválida na chave', 'pt_PT': 'regex inválida na chave', 'es': 'regex no válida en la clave', 'it': 'regex non valida nella chiave'},
     'notSaved': {'en': 'Not saved: {0}', 'pt_BR': 'Não salvei: {0}', 'pt_PT': 'Não guardado: {0}', 'es': 'No se guardó: {0}', 'it': 'Non salvato: {0}'},
     'confirmDelete': {'en': 'Delete {0}?', 'pt_BR': 'Deletar {0}?', 'pt_PT': 'Eliminar {0}?', 'es': '¿Eliminar {0}?', 'it': 'Eliminare {0}?'},
+    'pageExists': {
+        'en': '{0} already exists.',
+        'pt_BR': '{0} já existe.',
+        'pt_PT': '{0} já existe.',
+        'es': '{0} ya existe.',
+        'it': '{0} esiste già.',
+    },
+    'merge': {'en': 'Merge', 'pt_BR': 'Mesclar', 'pt_PT': 'Juntar', 'es': 'Combinar', 'it': 'Unisci'},
     'openInClaude': {'en': 'Open in Claude', 'pt_BR': 'Abrir no Claude', 'pt_PT': 'Abrir no Claude', 'es': 'Abrir en Claude', 'it': 'Apri in Claude'},
 }
 

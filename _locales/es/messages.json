@@ -155,6 +155,12 @@
   "confirmDelete": {
     "message": "¿Eliminar {0}?"
   },
+  "pageExists": {
+    "message": "{0} ya existe."
+  },
+  "merge": {
+    "message": "Combinar"
+  },
   "openInClaude": {
     "message": "Abrir en Claude"
   }

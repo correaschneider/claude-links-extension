@@ -155,6 +155,12 @@
   "confirmDelete": {
     "message": "Delete {0}?"
   },
+  "pageExists": {
+    "message": "{0} already exists."
+  },
+  "merge": {
+    "message": "Merge"
+  },
   "openInClaude": {
     "message": "Open in Claude"
   }
