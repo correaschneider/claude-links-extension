@@ -58,9 +58,10 @@ Exemplo de regra para o Discord:
 | `/(triagem\|abrir-chamado)\s+([A-Z][A-Z0-9]*-\d+)` | `Rode a skill $1 na $2` | *(vazio)* |
 
 A chave é validada enquanto você digita: regex inválida fica marcada, com o
-erro logo abaixo. O botão **▶** de cada linha abre o Claude na hora com aquele
-valor; se o valor usa `$1`, `$2`…, ele pede um texto de exemplo, mostra o que
-casou com a chave e abre com os grupos preenchidos.
+erro logo abaixo. O botão **▶** de cada linha aplica aquela regra na hora na aba
+aberta, sem salvar nem recarregar a página, e diz quantos trechos viraram link.
+A aba precisa ser do domínio da página (abra o popup pelo ícone da extensão
+estando nela).
 
 Ao clicar em **Salvar**, o navegador pede permissão para a extensão rodar
 naquele domínio. Página sem permissão aparece marcada como "sem permissão" na
@@ -84,8 +85,9 @@ coletado nem enviado ([política de privacidade](https://correaschneider.github.
 |---------|--------|
 | `manifest.json` | Manifesto (Manifest V3). |
 | `background.js` | Registra o content script só nos domínios autorizados. |
-| `content.js` | Encontra os textos e cria os links. |
-| `link.js` | Monta o link `claude://` (usado pelo content script e pelo popup). |
+| `content.js` | Lê a config e aplica as regras do domínio ao carregar a página. |
+| `linkify.js` | Núcleo da troca de textos por links (usado também pelo ▶). |
+| `link.js` | Monta o link `claude://` . |
 | `defaults.js` | Config inicial (vazia). |
 | `options.html` / `options.js` | Popup com a lista de páginas e o formulário. |
 | `icons/` | Ícone em SVG e PNGs 16/32/48/128. |

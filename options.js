@@ -64,10 +64,17 @@ function showList() {
 
 // ---- Formulário ----
 
+// Mensagem abaixo da linha: erro (escuro) ou resultado do ▶ (neutro).
+function rowMessage(row, text, isError) {
+  const msg = row.querySelector('.row-msg');
+  msg.textContent = text;
+  msg.classList.toggle('info', !isError);
+  msg.hidden = !text;
+}
+
 // Valida a chave enquanto digita; devolve o RegExp ou null.
 function checkMatch(row) {
   const input = row.querySelector('.match');
-  const msg = row.querySelector('.row-msg');
   const value = input.value.trim();
   let re = null;
   let error = '';
@@ -75,50 +82,48 @@ function checkMatch(row) {
     try { re = new RegExp(value); } catch (e) { error = `Regex inválida: ${e.message}`; }
   }
   input.classList.toggle('invalid', Boolean(error));
-  msg.textContent = error;
-  msg.hidden = !error;
+  rowMessage(row, error, true);
   return re;
 }
 
-function rowRule(row) {
-  return {
+// Aplica só esta regra na aba aberta, sem salvar nem recarregar a página.
+async function runOnPage(row) {
+  const rule = {
+    match: row.querySelector('.match').value.trim(),
     q: row.querySelector('.q').value.trim(),
     folder: row.querySelector('.folder').value.trim(),
   };
-}
+  if (!rule.match || !checkMatch(row)) return rowMessage(row, 'Preencha uma chave válida.', true);
+  if (!rule.q) return rowMessage(row, 'Preencha o valor.', true);
+  if (!rule.folder) delete rule.folder;
 
-// Abre o deep link pela aba atual: o navegador entrega o claude:// ao sistema
-// sem sair da página.
-function openLink(url) {
-  chrome.tabs.update({ url }).catch(() => { window.location.href = url; });
-}
-
-// Preenche $1, $2… a partir do texto de exemplo e mostra o que casou.
-function testSample(row) {
-  const re = checkMatch(row);
-  const result = row.querySelector('.result');
-  const sample = row.querySelector('.sample').value;
-  const m = re && sample ? sample.match(re) : null;
-  result.textContent = !sample ? '' : m ? `casou: ${m[0]}` : 'não casou com a chave';
-  return m;
-}
-
-function runRep(row) {
-  const rule = rowRule(row);
-  if (!rule.q) {
-    row.querySelector('.q').classList.add('invalid');
-    row.querySelector('.q').focus();
-    return;
+  const page = $('host').value.trim();
+  let tab;
+  try {
+    [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  } catch {
+    tab = null;
   }
-  row.querySelector('.q').classList.remove('invalid');
-  const test = row.querySelector('.row-test');
-  // Sem $n, abre direto; com $n, pede um texto de exemplo.
-  if (!/\$\d/.test(rule.q)) {
-    test.hidden = true;
-    return openLink(buildLink(rule));
+  let host = '';
+  try { host = new URL(tab.url).hostname; } catch { /* aba sem URL legível */ }
+  if (!host || !(host === page || host.endsWith(`.${page}`))) {
+    return rowMessage(row, `Abra uma aba em ${page || 'o domínio da página'} e clique no ícone da extensão para executar.`, true);
   }
-  test.hidden = !test.hidden;
-  if (!test.hidden) row.querySelector('.sample').focus();
+
+  try {
+    const target = { tabId: tab.id };
+    await chrome.scripting.executeScript({ target, files: ['link.js', 'linkify.js'] });
+    const [{ result }] = await chrome.scripting.executeScript({
+      target,
+      func: (r) => globalThis.ClaudeLinks.run([r]),
+      args: [rule],
+    });
+    rowMessage(row, result
+      ? `${result} ${result === 1 ? 'trecho virou' : 'trechos viraram'} link nesta aba.`
+      : 'Nenhum trecho novo para trocar nesta aba.', false);
+  } catch (e) {
+    rowMessage(row, `Não consegui executar na aba: ${e.message}`, true);
+  }
 }
 
 function addRep(r = {}) {
@@ -126,13 +131,8 @@ function addRep(r = {}) {
   row.querySelector('.match').value = r.match || '';
   row.querySelector('.q').value = r.q || '';
   row.querySelector('.folder').value = r.folder || '';
-  row.querySelector('.match').addEventListener('input', () => { checkMatch(row); testSample(row); });
-  row.querySelector('.sample').addEventListener('input', () => testSample(row));
-  row.querySelector('.run-rep').addEventListener('click', () => runRep(row));
-  row.querySelector('.run-sample').addEventListener('click', () => {
-    const m = testSample(row);
-    if (m) openLink(buildLink(rowRule(row), m));
-  });
+  row.querySelector('.match').addEventListener('input', () => checkMatch(row));
+  row.querySelector('.run-rep').addEventListener('click', () => runOnPage(row));
   row.querySelector('.del-rep').addEventListener('click', () => row.remove());
   $('reps').append(row);
   checkMatch(row);

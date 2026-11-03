@@ -71,9 +71,7 @@
 
   .row { display:grid; grid-template-columns:1.4fr 1.4fr 1fr 34px 34px; gap:8px; align-items:center; margin-bottom:10px; }
   .row-msg { grid-column:1 / -1; margin:-4px 0 0; font:12px var(--mono); color:var(--bg-900); }
-  .row-test { grid-column:1 / -1; display:flex; gap:8px; align-items:center; padding:10px; background:var(--bg-50); border-radius:4px; }
-  .row-test input { flex:1; }
-  .row-test .result { font:12px var(--mono); color:var(--bg-600); white-space:nowrap; }
+  .row-msg.info { color:var(--bg-600); }
   .row > * { min-width:0; }
   .labels { margin-bottom:6px; font:11px var(--mono); text-transform:uppercase; letter-spacing:.05em; color:var(--bg-500); }
   .tip { cursor:help; border-bottom:1px dotted var(--bg-500); text-transform:none; }
@@ -147,17 +145,11 @@
     <input class="match" placeholder="/(triagem)\s+(TASK-\d+)">
     <input class="q" placeholder="Rode a skill $1 na $2">
     <input class="folder" placeholder="(pasta padrão)">
-    <button class="icon-btn run-rep" title="Executar agora: abre o Claude com este valor">▶</button>
+    <button class="icon-btn run-rep" title="Executar agora: aplica esta regra na aba aberta">▶</button>
     <button class="icon-btn del-rep" title="Deletar substituição">✕</button>
     <p class="row-msg" hidden></p>
-    <div class="row-test" hidden>
-      <input class="sample" placeholder="Texto de exemplo para preencher $1, $2… (ex.: /triagem TASK-123)">
-      <span class="result"></span>
-      <button class="btn-contained run-sample">Abrir</button>
-    </div>
   </div>
 </template>
 
 <script src="defaults.js"></script>
-<script src="link.js"></script>
 <script src="options.js"></script>
