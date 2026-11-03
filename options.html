@@ -1,74 +1,139 @@
 <!doctype html>
 <meta charset="utf-8">
 <title>Claude Links — config</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-  :root { --bg:#fff; --fg:#1f2328; --muted:#656d76; --card:#f6f8fa; --line:#d0d7de; --accent:#2563eb; --danger:#b91c1c; --ok:#15803d; }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg:#1e1f22; --fg:#e6e6e6; --muted:#9aa0a6; --card:#2b2d31; --line:#3f4147; --accent:#5b8def; --danger:#f87171; --ok:#4ade80; }
+  /* Paleta blueGrey do MUI */
+  :root {
+    --bg-50:#eceff1; --bg-100:#cfd8dc; --bg-200:#b0bec5; --bg-300:#90a4ae; --bg-400:#78909c;
+    --bg-500:#607d8b; --bg-600:#546e7a; --bg-700:#455a64; --bg-800:#37474f; --bg-900:#263238;
+    --paper:#ffffff;
+    --mono:'DejaVu Sans Mono', ui-monospace, Menlo, Consolas, monospace;
+    --serif:'Lora', Georgia, serif;
+    --sans:'Roboto', 'Liberation Sans', Helvetica, Arial, sans-serif;
+    --e1:0 2px 1px -1px rgba(38,50,56,.2),0 1px 1px 0 rgba(38,50,56,.14),0 1px 3px 0 rgba(38,50,56,.12);
+    --e4:0 2px 4px -1px rgba(38,50,56,.2),0 4px 5px 0 rgba(38,50,56,.14),0 1px 10px 0 rgba(38,50,56,.12);
+    --e6:0 3px 5px -1px rgba(38,50,56,.2),0 6px 10px 0 rgba(38,50,56,.14),0 1px 18px 0 rgba(38,50,56,.12);
   }
-  * { box-sizing: border-box; }
-  body { font: 14px system-ui, sans-serif; background: var(--bg); color: var(--fg); margin: 0; padding: 16px; min-width: 640px; }
-  header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-  h1 { font-size: 18px; margin: 0; }
-  [hidden] { display: none !important; }
-  .list { list-style: none; margin: 0; padding: 0; }
-  .item { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: var(--card); border: 1px solid var(--line); border-radius: 8px; margin-bottom: 8px; cursor: pointer; }
-  .item:hover { border-color: var(--accent); }
-  .item .host { font-weight: 600; flex: 1; }
-  .item .count { color: var(--muted); font-size: 12px; }
-  .empty { color: var(--muted); padding: 16px 0; }
-  .row { display: grid; grid-template-columns: 1.4fr 1.4fr 1fr auto; gap: 6px; margin-bottom: 6px; }
-  .labels { font-size: 12px; color: var(--muted); }
-  label.host-label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
-  input { width: 100%; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--fg); font: 13px ui-monospace, monospace; }
-  input.invalid { border-color: var(--danger); }
-  button { padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--fg); cursor: pointer; }
-  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
-  button.plus { width: 32px; height: 32px; padding: 0; font-size: 20px; line-height: 1; border-radius: 50%; }
-  button.danger { color: var(--danger); }
-  .tip { cursor: help; border-bottom: 1px dotted; }
-  .bar { display: flex; gap: 8px; align-items: center; margin-top: 12px; }
-  .bar .spacer { flex: 1; }
-  #status.err { color: var(--danger); } #status.ok { color: var(--ok); }
-  .hint { color: var(--muted); font-size: 12px; margin: 10px 0 0; }
-  .host-field { margin-bottom: 12px; }
+  * { box-sizing:border-box; }
+  [hidden] { display:none !important; }
+  body { margin:0; min-width:680px; background:var(--bg-50); color:var(--bg-800); font:14px/1.5 var(--sans); }
+
+  /* AppBar */
+  .appbar { display:flex; align-items:center; gap:12px; height:56px; padding:0 16px; background:var(--bg-800); color:#fff; box-shadow:var(--e4); border-left:6px solid var(--bg-900); }
+  .appbar h1 { font:600 18px var(--serif); margin:0; flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .appbar .kicker { font:12px var(--mono); color:var(--bg-200); }
+
+  main { padding:16px; }
+  .label { font:12px var(--mono); text-transform:uppercase; letter-spacing:.06em; color:var(--bg-500); margin:0 0 8px; }
+
+  /* Botões MUI */
+  button { font:500 13px var(--sans); letter-spacing:.04em; text-transform:uppercase; border-radius:4px; cursor:pointer; transition:background .2s, box-shadow .2s, border-color .2s; }
+  .btn-contained { background:var(--bg-700); color:#fff; border:0; padding:7px 18px; box-shadow:var(--e1); }
+  .btn-contained:hover { background:var(--bg-900); box-shadow:var(--e4); }
+  .btn-outlined { background:transparent; color:var(--bg-700); border:1px solid var(--bg-300); padding:6px 16px; }
+  .btn-outlined:hover { background:rgba(69,90,100,.06); border-color:var(--bg-700); }
+  .btn-text { background:transparent; color:var(--bg-700); border:0; padding:7px 10px; }
+  .btn-text:hover { background:rgba(69,90,100,.08); }
+  .appbar .btn-text { color:var(--bg-100); }
+  .appbar .btn-text:hover { background:rgba(255,255,255,.08); color:#fff; }
+  .fab { width:40px; height:40px; border-radius:50%; border:0; background:var(--bg-50); color:var(--bg-900); font:400 24px/1 var(--sans); box-shadow:var(--e6); }
+  .fab:hover { background:#fff; }
+  .icon-btn { width:34px; height:34px; border-radius:50%; border:0; background:transparent; color:var(--bg-500); font-size:16px; text-transform:none; }
+  .icon-btn:hover { background:rgba(69,90,100,.1); color:var(--bg-900); }
+
+  /* Lista (MUI List em Paper) */
+  .list { list-style:none; margin:0; padding:0; background:var(--paper); border-radius:4px; box-shadow:var(--e1); overflow:hidden; }
+  .item { display:flex; align-items:center; gap:12px; padding:12px 16px; border-bottom:1px solid var(--bg-100); cursor:pointer; transition:background .15s; }
+  .item:last-child { border-bottom:0; }
+  .item:hover { background:var(--bg-50); }
+  .item::before { content:''; width:4px; align-self:stretch; background:var(--bg-700); border-radius:2px; }
+  .item .host { flex:1; font-weight:500; color:var(--bg-900); font-size:15px; }
+  .item .count { font:12px var(--mono); color:var(--bg-500); }
+  .item::after { content:'›'; color:var(--bg-400); font-size:20px; line-height:1; }
+  .empty { background:var(--paper); border-radius:4px; box-shadow:var(--e1); padding:28px 16px; text-align:center; color:var(--bg-500); margin:0; }
+
+  /* Paper do formulário */
+  .paper { background:var(--paper); border-radius:4px; box-shadow:var(--e1); padding:16px; margin-bottom:16px; }
+  .rule-line { height:2px; background:var(--bg-700); margin:0 0 16px; }
+
+  /* TextField outlined */
+  .field { position:relative; }
+  .field label { position:absolute; top:-8px; left:10px; padding:0 4px; background:var(--paper); font-size:12px; color:var(--bg-500); }
+  input { width:100%; height:40px; padding:8px 12px; border:1px solid var(--bg-200); border-radius:4px; background:var(--paper); color:var(--bg-900); font:13px var(--mono); outline:none; transition:border-color .15s, box-shadow .15s; }
+  input:hover { border-color:var(--bg-500); }
+  input:focus { border-color:var(--bg-700); box-shadow:0 0 0 1px var(--bg-700); }
+  input.invalid { border-color:var(--bg-900); box-shadow:0 0 0 2px var(--bg-900); background:var(--bg-50); }
+  input::placeholder { color:var(--bg-300); }
+
+  .row { display:grid; grid-template-columns:1.4fr 1.4fr 1fr 34px; gap:8px; align-items:center; margin-bottom:10px; }
+  .row > * { min-width:0; }
+  .labels { margin-bottom:6px; font:11px var(--mono); text-transform:uppercase; letter-spacing:.05em; color:var(--bg-500); }
+  .tip { cursor:help; border-bottom:1px dotted var(--bg-500); text-transform:none; }
+
+  .bar { display:flex; align-items:center; gap:8px; }
+  .bar .spacer { flex:1; }
+  #status { font-size:13px; }
+  #status.err { color:var(--bg-900); font-weight:500; }
+  #status.ok { color:var(--bg-600); }
+
+  .hint { display:flex; gap:10px; margin:0; padding:10px 14px; background:var(--paper); border-left:4px solid var(--bg-700); border-radius:4px; box-shadow:var(--e1); font-size:13px; color:var(--bg-700); }
+  .hint b { font:700 13px var(--mono); color:var(--bg-900); }
 </style>
 
 <!-- Listagem -->
 <section id="view-list">
-  <header>
+  <header class="appbar">
     <h1>Claude Links</h1>
-    <button id="add-page" class="plus primary" title="Add page">+</button>
+    <span class="kicker">// páginas</span>
+    <button id="add-page" class="fab" title="Add page">+</button>
   </header>
-  <ul id="list" class="list"></ul>
-  <p id="empty" class="empty" hidden>Nenhuma página. Clique em + para adicionar.</p>
+  <main>
+    <ul id="list" class="list"></ul>
+    <p id="empty" class="empty" hidden>Nenhuma página. Clique em + para adicionar.</p>
+  </main>
 </section>
 
 <!-- Formulário de uma página -->
 <section id="view-form" hidden>
-  <header>
+  <header class="appbar">
+    <button id="back" class="btn-text" title="Voltar">← Voltar</button>
     <h1 id="form-title">Página</h1>
-    <button id="back">← Voltar</button>
   </header>
-  <div class="host-field">
-    <label class="host-label" for="host">Página (domínio)</label>
-    <input id="host" placeholder="discord.com">
-  </div>
-  <div class="row labels">
-    <span>Chave (regex)</span>
-    <span>Valor (vai como q; use $1, $2…)</span>
-    <span>Folder <span class="tip" title="Opcional. Se ficar vazio, o link não leva folder e o Claude Desktop abre na pasta padrão.">(?)</span></span>
-    <span></span>
-  </div>
-  <div id="reps"></div>
-  <button id="add-rep">+ Substituição</button>
-  <div class="bar">
-    <button id="del-page" class="danger">Deletar página</button>
-    <span class="spacer"></span>
-    <span id="status"></span>
-    <button id="save" class="primary">Salvar</button>
-  </div>
-  <p class="hint">Começar o valor com “/” não funciona: o Claude Desktop troca a barra. Peça a skill em texto, ex.: “Rode a skill X na Y”.</p>
+  <main>
+    <div class="paper">
+      <p class="label">Página</p>
+      <div class="rule-line"></div>
+      <div class="field">
+        <label for="host">Domínio</label>
+        <input id="host" placeholder="discord.com">
+      </div>
+    </div>
+
+    <div class="paper">
+      <p class="label">Substituições</p>
+      <div class="rule-line"></div>
+      <div class="row labels">
+        <span>Chave (regex)</span>
+        <span>Valor · $1, $2…</span>
+        <span>Folder <span class="tip" title="Opcional. Se ficar vazio, o link não leva folder e o Claude Desktop abre na pasta padrão.">(?)</span></span>
+        <span></span>
+      </div>
+      <div id="reps"></div>
+      <button id="add-rep" class="btn-text">+ Substituição</button>
+    </div>
+
+    <div class="bar paper">
+      <button id="del-page" class="btn-outlined">Deletar página</button>
+      <span class="spacer"></span>
+      <span id="status"></span>
+      <button id="save" class="btn-contained">Salvar</button>
+    </div>
+
+    <p class="hint"><b>/</b><span>Começar o valor com “/” não funciona: o Claude Desktop troca a barra. Peça a skill em texto, ex.: “Rode a skill X na Y”.</span></p>
+  </main>
 </section>
 
 <template id="tpl-rep">
@@ -76,7 +141,7 @@
     <input class="match" placeholder="/(triagem)\s+(TASK-\d+)">
     <input class="q" placeholder="Rode a skill $1 na $2">
     <input class="folder" placeholder="(pasta padrão)">
-    <button class="danger del-rep" title="Deletar substituição">✕</button>
+    <button class="icon-btn del-rep" title="Deletar substituição">✕</button>
   </div>
 </template>
 
