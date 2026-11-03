@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+    <defs>
+    <!-- Metade de baixo (no eixo do elo), para o elo A passar por cima do B -->
+    <clipPath id="lower">
+      <rect x="0" y="64" width="128" height="64"/>
+    </clipPath>
+  </defs>
+  <rect width="1280" height="800" fill="#eceff1"/>
+  <rect width="16" height="800" fill="#455a64"/>
+  <text x="90" y="110" font-family="DejaVu Sans Mono" font-size="20" fill="#607d8b">// claude links</text>
+  <text x="90" y="172" font-family="Noto Serif" font-weight="bold" font-size="52" fill="#263238">Um aviso vira um atalho.</text>
+  <text x="90" y="218" font-family="Liberation Sans" font-size="22" fill="#546e7a">Regras por regex transformam textos da página em links para o Claude Desktop.</text>
+
+  <!-- antes -->
+  <text x="90" y="300" font-family="DejaVu Sans Mono" font-size="16" fill="#78909c">ANTES · TEXTO PURO</text>
+  <rect x="90" y="312" width="500" height="2" fill="#b0bec5"/>
+  <rect x="90" y="332" width="500" height="170" rx="4" fill="#ffffff" stroke="#cfd8dc"/>
+  <text x="120" y="378" font-family="Liberation Sans" font-weight="bold" font-size="20" fill="#263238">[TASK-123] Erro ao enviar mensagem</text>
+  <text x="120" y="418" font-family="Liberation Sans" font-size="18" fill="#37474f">Status: aberto · Prioridade: média</text>
+  <text x="120" y="458" font-family="Liberation Sans" font-size="18" fill="#37474f">Fazer a triagem com</text>
+  <text x="300" y="458" font-family="DejaVu Sans Mono" font-size="17" fill="#37474f">/triagem TASK-123</text>
+
+  <!-- seta -->
+  <line x1="612" y1="417" x2="660" y2="417" stroke="#607d8b" stroke-width="3"/>
+  <polygon points="660,409 674,417 660,425" fill="#607d8b"/>
+
+  <!-- depois -->
+  <text x="690" y="300" font-family="DejaVu Sans Mono" font-size="16" fill="#37474f">DEPOIS · LINK</text>
+  <rect x="690" y="312" width="500" height="2" fill="#455a64"/>
+  <rect x="690" y="332" width="500" height="170" rx="4" fill="#ffffff" stroke="#cfd8dc"/>
+  <text x="720" y="378" font-family="Liberation Sans" font-weight="bold" font-size="20" fill="#263238">[TASK-123] Erro ao enviar mensagem</text>
+  <text x="720" y="418" font-family="Liberation Sans" font-size="18" fill="#37474f">Status: aberto · Prioridade: média</text>
+  <text x="720" y="458" font-family="Liberation Sans" font-size="18" fill="#37474f">Fazer a triagem com</text>
+  <text x="900" y="458" font-family="DejaVu Sans Mono" font-size="17" fill="#455a64" text-decoration="underline">/triagem TASK-123</text>
+
+  <!-- composer do Claude Desktop -->
+  <line x1="940" y1="502" x2="940" y2="548" stroke="#607d8b" stroke-width="3" stroke-dasharray="6 5"/>
+  <polygon points="932,546 940,560 948,546" fill="#607d8b"/>
+  <rect x="690" y="566" width="500" height="108" rx="4" fill="#263238"/>
+  <text x="716" y="602" font-family="DejaVu Sans Mono" font-size="15" fill="#cfd8dc">Claude Desktop · nova sessão</text>
+  <text x="716" y="644" font-family="DejaVu Sans Mono" font-size="20" fill="#ffffff">Rode a skill triagem na TASK-123</text>
+
+  <!-- regra -->
+  <text x="90" y="590" font-family="DejaVu Sans Mono" font-size="16" fill="#37474f">REGRA</text>
+  <rect x="90" y="602" width="500" height="2" fill="#455a64"/>
+  <text x="90" y="640" font-family="DejaVu Sans Mono" font-size="16" fill="#78909c">chave</text>
+  <text x="170" y="640" font-family="DejaVu Sans Mono" font-size="16" fill="#263238">/(triagem)\s+([A-Z]+-\d+)</text>
+  <text x="90" y="672" font-family="DejaVu Sans Mono" font-size="16" fill="#78909c">valor</text>
+  <text x="170" y="672" font-family="DejaVu Sans Mono" font-size="16" fill="#263238">Rode a skill $1 na $2</text>
+
+  <text x="90" y="752" font-family="DejaVu Sans Mono" font-size="15" fill="#90a4ae">Manifest V3 · claude:// deep links · sem coleta de dados</text>
+</svg>

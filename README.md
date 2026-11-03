@@ -11,8 +11,10 @@ aperta Enter.
 
 ## Como funciona
 
-- O content script roda nas páginas cadastradas e acompanha o conteúdo novo
-  (sites como o Discord montam as mensagens dinamicamente).
+- O content script roda só nas páginas cadastradas **e autorizadas**: ao salvar
+  uma página no popup, o navegador pede permissão para aquele domínio. Ele
+  acompanha o conteúdo novo (sites como o Discord montam as mensagens
+  dinamicamente).
 - Cada trecho que casa com uma regra vira um link no formato:
 
   ```
@@ -55,7 +57,12 @@ Exemplo de regra para o Discord:
 |-------|-------|--------|
 | `/(triagem\|abrir-chamado)\s+([A-Z][A-Z0-9]*-\d+)` | `Rode a skill $1 na $2` | *(vazio)* |
 
-A configuração fica salva no `chrome.storage.sync` do navegador.
+Ao clicar em **Salvar**, o navegador pede permissão para a extensão rodar
+naquele domínio. Página sem permissão aparece marcada como "sem permissão" na
+lista; é só abrir e salvar de novo. Deletar a página devolve a permissão.
+
+A configuração fica salva no `chrome.storage.sync` do navegador. Nada é
+coletado nem enviado ([política de privacidade](https://correaschneider.github.io/claude-links-extension/privacy.html)).
 
 ## Limitações
 
@@ -71,6 +78,10 @@ A configuração fica salva no `chrome.storage.sync` do navegador.
 | Arquivo | Função |
 |---------|--------|
 | `manifest.json` | Manifesto (Manifest V3). |
+| `background.js` | Registra o content script só nos domínios autorizados. |
 | `content.js` | Encontra os textos e cria os links. |
 | `defaults.js` | Config inicial (vazia). |
 | `options.html` / `options.js` | Popup com a lista de páginas e o formulário. |
+| `icons/` | Ícone em SVG e PNGs 16/32/48/128. |
+| `store/` | Textos e imagens do anúncio na Chrome Web Store. |
+| `build.sh` | Gera o `.zip` para enviar à loja. |

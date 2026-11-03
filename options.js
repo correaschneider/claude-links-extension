@@ -13,6 +13,19 @@ function persist(done) {
   chrome.storage.sync.set({ config }, done);
 }
 
+function originsFor(page) {
+  return [`*://${page}/*`, `*://*.${page}/*`];
+}
+
+// Páginas sem permissão concedida aparecem marcadas na lista.
+async function granted(page) {
+  try {
+    return await chrome.permissions.contains({ origins: originsFor(page) });
+  } catch {
+    return false;
+  }
+}
+
 // ---- Listagem ----
 
 function renderList() {
@@ -29,6 +42,14 @@ function renderList() {
     const n = (p.replacements || []).length;
     count.textContent = `${n} substituiç${n === 1 ? 'ão' : 'ões'}`;
     li.append(host, count);
+    granted(p.page).then((ok) => {
+      if (ok) return;
+      const warn = document.createElement('span');
+      warn.className = 'no-perm';
+      warn.textContent = 'sem permissão';
+      warn.title = 'Abra a página e clique em Salvar para permitir a extensão neste site.';
+      host.after(warn);
+    });
     li.addEventListener('click', () => openForm(i));
     list.append(li);
   });
@@ -112,14 +133,28 @@ $('save').addEventListener('click', () => {
   } catch (e) {
     return show(`Não salvei: ${e.message}`, false);
   }
+  // O pedido de permissão precisa sair no clique, antes de qualquer await.
+  // Não esperamos a resposta para salvar: em alguns sistemas o popup fecha
+  // quando o diálogo de permissão abre. O background registra o script
+  // quando a permissão chega.
+  chrome.permissions.request({ origins: originsFor(page.page) }).catch(() => {});
+  const previous = editing >= 0 ? config[editing].page : null;
   if (editing >= 0) config[editing] = page;
   else config.push(page);
+  if (previous && previous !== page.page) releaseIfUnused(previous);
   persist(showList);
 });
 
+// Devolve a permissão de um domínio que nenhuma página usa mais.
+function releaseIfUnused(host) {
+  if (config.some((p) => p.page === host)) return;
+  chrome.permissions.remove({ origins: originsFor(host) }).catch(() => {});
+}
+
 $('del-page').addEventListener('click', () => {
   if (editing < 0 || !confirm(`Deletar ${config[editing].page}?`)) return;
-  config.splice(editing, 1);
+  const [removed] = config.splice(editing, 1);
+  releaseIfUnused(removed.page);
   persist(showList);
 });
 
