@@ -110,7 +110,41 @@ function regexError(e) {
   return t('regexInvalid', known ? t(known[1]) : reason);
 }
 
-// Valida a chave enquanto digita; devolve o RegExp ou null.
+// Reduz o que a pessoa digita ao domínio: tira protocolo, caminho, porta,
+// usuário, "*." e "www.", e passa para minúsculas/punycode.
+// "https://www.Discord.com/channels/1" -> "discord.com"
+function normalizeHost(input) {
+  let s = input.trim().toLowerCase()
+    .replace(/^[a-z][a-z0-9+.-]*:\/\//, '')
+    .replace(/^\*\./, '')
+    .split(/[/?#]/)[0]
+    .replace(/^[^@]*@/, '')
+    .replace(/:\d*$/, '')
+    .replace(/\.+$/, '');
+  try { s = new URL(`http://${s}`).hostname; } catch { /* fica como está; validHost recusa */ }
+  return s.replace(/^www\./, '');
+}
+
+function validHost(host) {
+  return /^(localhost|(\d{1,3}\.){3}\d{1,3}|([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z0-9-]{2,})$/.test(host);
+}
+
+// Avisos que não impedem salvar: a regra funciona, mas não como a pessoa espera.
+function rowWarnings(row, re) {
+  const value = row.querySelector('.match').value.trim();
+  const q = row.querySelector('.q').value.trim();
+  const folder = row.querySelector('.folder').value.trim();
+  const warnings = [];
+  // `{,n}` é válido mas não repete nada: casa o texto "{,n}" literal.
+  const loose = value.match(/(?<!\\)\{,(\d+)\}/);
+  if (loose) warnings.push(t('looseQuant', loose[0], loose[1]));
+  if (re && re.test('')) warnings.push(t('matchesEmpty'));
+  if (q.startsWith('/')) warnings.push(t('valueSlash'));
+  if (folder && !/^(\/|~|[a-zA-Z]:[\\/])/.test(folder)) warnings.push(t('folderRelative'));
+  return warnings.join(' ');
+}
+
+// Valida a linha enquanto digita; devolve o RegExp da chave ou null.
 function checkMatch(row) {
   const input = row.querySelector('.match');
   const value = input.value.trim();
@@ -120,15 +154,8 @@ function checkMatch(row) {
     try { re = new RegExp(value); } catch (e) { error = regexError(e); }
   }
   input.classList.toggle('invalid', Boolean(error));
-  if (error) {
-    rowMessage(row, error, true);
-  } else {
-    // `{,n}` é válido mas não repete nada: casa o texto "{,n}" literal.
-    const loose = value.match(/(?<!\\)\{,(\d+)\}/);
-    rowMessage(row, loose
-      ? t('looseQuant', loose[0], loose[1])
-      : '', false);
-  }
+  if (error) rowMessage(row, error, true);
+  else rowMessage(row, rowWarnings(row, re), false);
   return re;
 }
 
@@ -143,7 +170,7 @@ async function runOnPage(row) {
   if (!rule.q) return rowMessage(row, t('fillValue'), true);
   if (!rule.folder) delete rule.folder;
 
-  const page = $('host').value.trim();
+  const page = normalizeHost($('host').value);
   let tab;
   try {
     [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -189,7 +216,9 @@ function addRep(r = {}) {
   row.querySelector('.match').value = r.match || '';
   row.querySelector('.q').value = r.q || '';
   row.querySelector('.folder').value = r.folder || '';
-  row.querySelector('.match').addEventListener('input', () => checkMatch(row));
+  for (const field of ['.match', '.q', '.folder']) {
+    row.querySelector(field).addEventListener('input', () => checkMatch(row));
+  }
   row.querySelector('.run-rep').addEventListener('click', () => runOnPage(row));
   row.querySelector('.del-rep').addEventListener('click', () => row.remove());
   $('reps').append(row);
@@ -217,8 +246,10 @@ function collect() {
   document.querySelectorAll('#host, .q').forEach((i) => i.classList.remove('invalid'));
   const fail = (input, msg) => { input.classList.add('invalid'); input.focus(); throw new Error(msg); };
 
-  const page = $('host').value.trim();
+  const page = normalizeHost($('host').value);
   if (!page) fail($('host'), t('errMissingDomain'));
+  if (!validHost(page)) fail($('host'), t('errInvalidDomain', $('host').value.trim()));
+  $('host').value = page;
 
   const replacements = [...$('reps').querySelectorAll('.rep')].flatMap((row) => {
     const [mEl, qEl, fEl] = ['.match', '.q', '.folder'].map((s) => row.querySelector(s));
@@ -231,7 +262,9 @@ function collect() {
     if (!checkMatch(row)) fail(mEl, t('errInvalidKey'));
     return [folder ? { match, q, folder } : { match, q }];
   });
-  return { page, replacements };
+  if (!replacements.length) fail($('reps').querySelector('.match') || $('host'), t('errNoReplacements'));
+  // Regras repetidas na mesma página viram uma só.
+  return mergeInto({ page, replacements: [] }, { replacements });
 }
 
 // Domínio da aba ativa (quando aberto pelo ícone da extensão); vazio se não der.
@@ -239,7 +272,7 @@ async function activeHost() {
   try {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     const url = new URL(tab && tab.url);
-    return /^https?:$/.test(url.protocol) ? url.hostname.replace(/^www\./, '') : '';
+    return /^https?:$/.test(url.protocol) ? normalizeHost(url.hostname) : '';
   } catch {
     return '';
   }
@@ -250,6 +283,14 @@ async function activeHost() {
 // Índice da página com esse domínio, ignorando a que está sendo editada.
 function findPage(host, except = -1) {
   return config.findIndex((p, i) => i !== except && p.page === host);
+}
+
+// Página cujas regras já valem para o host (o mesmo domínio ou um pai dele:
+// "discord.com" cobre "ptb.discord.com").
+function findCovering(host) {
+  const exact = findPage(host);
+  if (exact >= 0) return exact;
+  return config.findIndex((p) => host.endsWith(`.${p.page}`));
 }
 
 // Junta as substituições de `extra` em `target`, sem repetir regra igual.
@@ -268,7 +309,8 @@ function mergeInto(target, extra) {
 // Une páginas com o mesmo domínio (salvas antes desta validação existir).
 function dedupe(list) {
   const out = [];
-  for (const p of list) {
+  for (const raw of list) {
+    const p = { ...raw, page: normalizeHost(raw.page || '') };
     const existing = out.find((o) => o.page === p.page);
     if (existing) mergeInto(existing, p);
     else out.push({ ...p, replacements: [...(p.replacements || [])] });
@@ -288,8 +330,8 @@ let pendingMerge = null; // página do formulário esperando o clique em Mesclar
 
 $('add-page').addEventListener('click', async () => {
   const host = await activeHost();
-  const existing = host ? findPage(host) : -1;
-  // Domínio já cadastrado: abre a página dele em vez de criar outra.
+  const existing = host ? findCovering(host) : -1;
+  // Domínio (ou domínio pai) já cadastrado: abre a página dele em vez de criar outra.
   if (existing >= 0) openForm(existing);
   else openForm(-1, host);
 });
@@ -348,6 +390,7 @@ document.documentElement.lang = chrome.i18n.getUILanguage();
 
 chrome.storage.sync.get({ config: DEFAULT_CONFIG }, (data) => {
   config = dedupe(data.config);
-  if (config.length !== data.config.length) persist(showList);
+  const changed = JSON.stringify(config) !== JSON.stringify(data.config);
+  if (changed) persist(showList);
   else showList();
 });

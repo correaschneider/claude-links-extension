@@ -3,6 +3,22 @@
 Versions follow [Semantic Versioning](https://semver.org/). Each version has a
 `vX.Y.Z` tag and a GitHub release with the zip to upload to the Chrome Web Store.
 
+## [1.1.1] - 2026-11-03
+
+### Fixed
+- Domains are normalized before saving: `discord.com/`, `https://www.Discord.com/channels/…`,
+  `*.discord.com` and `discord.com:443` all become `discord.com`, so they no
+  longer create duplicate pages. Pages saved in those forms are fixed and merged
+  when the popup opens.
+- Invalid domains (e.g. `discord`) and pages with no replacements are refused.
+- **+** on a subdomain tab (e.g. `ptb.discord.com`) opens the parent domain's
+  page when it already covers it.
+- Identical rules in the same page are saved only once.
+
+### Added
+- Warnings for rules that save but won't behave as expected: key that matches
+  empty text, value starting with `/`, and a folder that isn't a full path.
+
 ## [1.1.0] - 2026-11-03
 
 ### Added
@@ -25,5 +41,6 @@ Versions follow [Semantic Versioning](https://semver.org/). Each version has a
 - Per-site permission on demand: runs only on domains you added and authorized.
 - Icon, privacy policy and Chrome Web Store listing material.
 
+[1.1.1]: https://github.com/correaschneider/claude-links-extension/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/correaschneider/claude-links-extension/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/correaschneider/claude-links-extension/releases/tag/v1.0.0

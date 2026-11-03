@@ -139,6 +139,41 @@ STRINGS = {
         'it': '{0} esiste già.',
     },
     'merge': {'en': 'Merge', 'pt_BR': 'Mesclar', 'pt_PT': 'Juntar', 'es': 'Combinar', 'it': 'Unisci'},
+    'errInvalidDomain': {
+        'en': '“{0}” is not a valid domain (e.g. discord.com)',
+        'pt_BR': '“{0}” não é um domínio válido (ex.: discord.com)',
+        'pt_PT': '“{0}” não é um domínio válido (ex.: discord.com)',
+        'es': '“{0}” no es un dominio válido (p. ej. discord.com)',
+        'it': '“{0}” non è un dominio valido (ad es. discord.com)',
+    },
+    'errNoReplacements': {
+        'en': 'add at least one replacement',
+        'pt_BR': 'adicione ao menos uma substituição',
+        'pt_PT': 'adicione pelo menos uma substituição',
+        'es': 'añade al menos una sustitución',
+        'it': 'aggiungi almeno una sostituzione',
+    },
+    'matchesEmpty': {
+        'en': 'Heads up: this key also matches empty text, so it never becomes a link. Use `+` instead of `*` or require at least one character.',
+        'pt_BR': 'Atenção: esta chave casa também com texto vazio, então nunca vira link. Use `+` no lugar de `*` ou exija ao menos um caractere.',
+        'pt_PT': 'Atenção: esta chave também corresponde a texto vazio, por isso nunca passa a ligação. Use `+` em vez de `*` ou exija pelo menos um carácter.',
+        'es': 'Atención: esta clave también coincide con texto vacío, así que nunca se convierte en enlace. Usa `+` en lugar de `*` o exige al menos un carácter.',
+        'it': 'Attenzione: questa chiave corrisponde anche a testo vuoto, quindi non diventa mai un link. Usa `+` al posto di `*` o richiedi almeno un carattere.',
+    },
+    'valueSlash': {
+        'en': 'Heads up: a value starting with `/` does not become a command in Claude Desktop. Ask for the skill in words.',
+        'pt_BR': 'Atenção: valor começando com `/` não vira comando no Claude Desktop. Peça a skill em texto.',
+        'pt_PT': 'Atenção: um valor começado por `/` não passa a comando no Claude Desktop. Peça a skill por texto.',
+        'es': 'Atención: un valor que empieza por `/` no se convierte en comando en Claude Desktop. Pide la skill con texto.',
+        'it': 'Attenzione: un valore che inizia con `/` non diventa un comando in Claude Desktop. Chiedi la skill a parole.',
+    },
+    'folderRelative': {
+        'en': 'Heads up: use the full folder path (e.g. `/home/me/project` or `C:\\projects`).',
+        'pt_BR': 'Atenção: use o caminho completo da pasta (ex.: `/home/eu/projeto` ou `C:\\projetos`).',
+        'pt_PT': 'Atenção: use o caminho completo da pasta (ex.: `/home/eu/projeto` ou `C:\\projetos`).',
+        'es': 'Atención: usa la ruta completa de la carpeta (p. ej. `/home/yo/proyecto` o `C:\\proyectos`).',
+        'it': 'Attenzione: usa il percorso completo della cartella (ad es. `/home/io/progetto` o `C:\\progetti`).',
+    },
     'openInClaude': {'en': 'Open in Claude', 'pt_BR': 'Abrir no Claude', 'pt_PT': 'Abrir no Claude', 'es': 'Abrir en Claude', 'it': 'Apri in Claude'},
 }
 

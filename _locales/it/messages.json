@@ -161,6 +161,21 @@
   "merge": {
     "message": "Unisci"
   },
+  "errInvalidDomain": {
+    "message": "“{0}” non è un dominio valido (ad es. discord.com)"
+  },
+  "errNoReplacements": {
+    "message": "aggiungi almeno una sostituzione"
+  },
+  "matchesEmpty": {
+    "message": "Attenzione: questa chiave corrisponde anche a testo vuoto, quindi non diventa mai un link. Usa `+` al posto di `*` o richiedi almeno un carattere."
+  },
+  "valueSlash": {
+    "message": "Attenzione: un valore che inizia con `/` non diventa un comando in Claude Desktop. Chiedi la skill a parole."
+  },
+  "folderRelative": {
+    "message": "Attenzione: usa il percorso completo della cartella (ad es. `/home/io/progetto` o `C:\\progetti`)."
+  },
   "openInClaude": {
     "message": "Apri in Claude"
   }
