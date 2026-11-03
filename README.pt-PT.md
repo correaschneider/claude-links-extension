@@ -88,6 +88,12 @@ gerar novamente a pasta `_locales/`.
   clicáveis as que começam por `http(s)`. Por isso a substituição é feita no
   navegador.
 - O navegador pede confirmação na primeira vez que abre uma ligação `claude://`.
+- **Com pasta, o Claude Desktop pede para confiar nela em cada ligação**, mesmo
+  que já a tenha autorizado antes. Deixe a pasta vazia para evitar essa pergunta.
+- **O texto capturado por `$1`, `$2`… vem da página**, e qualquer pessoa do
+  canal pode tê-lo escrito. Quebras de linha e caracteres invisíveis passam a
+  espaço e cada grupo é cortado em 200 caracteres; passe o rato sobre a ligação
+  para ver a mensagem completa e verifique-a antes de premir Enter.
 
 ## Ficheiros
 

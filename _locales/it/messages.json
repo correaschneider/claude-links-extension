@@ -36,7 +36,7 @@
     "message": "Cartella"
   },
   "folderTip": {
-    "message": "Facoltativo. Se vuoto, il link non include una cartella e Claude Desktop si apre in quella predefinita."
+    "message": "Facoltativo. Se vuoto, il link non include una cartella e Claude Desktop si apre in quella predefinita. Con una cartella, Claude Desktop chiede di considerarla attendibile a ogni link, anche se già autorizzata."
   },
   "addReplacement": {
     "message": "+ Sostituzione"
@@ -175,6 +175,12 @@
   },
   "folderRelative": {
     "message": "Attenzione: usa il percorso completo della cartella (ad es. `/home/io/progetto` o `C:\\progetti`)."
+  },
+  "nestedQuantifier": {
+    "message": "Attenzione: una ripetizione dentro un gruppo ripetuto (come `(a+)+`) può richiedere secondi su testo lungo e bloccare la scheda. Preferisci una chiave più semplice."
+  },
+  "folderTrust": {
+    "message": "Con una cartella, Claude Desktop chiede di considerarla attendibile ogni volta che si apre un link, anche se l’hai già autorizzata."
   },
   "openInClaude": {
     "message": "Apri in Claude"

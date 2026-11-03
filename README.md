@@ -86,6 +86,12 @@ The extension follows the browser's language: English (default), Portuguese
 - **Discord doesn't accept these links in a message**: it only makes
   `http(s)` links clickable. That's why the replacement happens in the browser.
 - The browser asks for confirmation the first time it opens a `claude://` link.
+- **With a folder, Claude Desktop asks you to trust it on every link**, even if
+  you already trusted it before. Leave the folder empty to skip that prompt.
+- **Text captured by `$1`, `$2`… comes from the page**, and anyone in the
+  channel may have written it. Line breaks and invisible characters become
+  spaces and each group is cut at 200 characters; hover a link to see the full
+  message, and review it before pressing Enter.
 
 ## Files
 

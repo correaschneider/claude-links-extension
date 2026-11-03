@@ -87,6 +87,12 @@ gerar de novo a pasta `_locales/`.
 - **O Discord não aceita esses links direto na mensagem**: ele só torna
   clicável o que começa com `http(s)`. Por isso a troca é feita no navegador.
 - O navegador pede confirmação na primeira vez que abre um link `claude://`.
+- **Com pasta, o Claude Desktop pede para confiar nela a cada link**, mesmo que
+  você já tenha autorizado antes. Deixe a pasta vazia para evitar essa pergunta.
+- **O texto capturado por `$1`, `$2`… vem da página**, e qualquer pessoa do
+  canal pode tê-lo escrito. Quebras de linha e caracteres invisíveis viram
+  espaço e cada grupo é cortado em 200 caracteres; passe o mouse no link para
+  ver a mensagem completa e confira antes de apertar Enter.
 
 ## Arquivos
 

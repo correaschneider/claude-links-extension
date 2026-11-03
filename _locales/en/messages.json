@@ -36,7 +36,7 @@
     "message": "Folder"
   },
   "folderTip": {
-    "message": "Optional. If empty, the link has no folder and Claude Desktop opens in its default folder."
+    "message": "Optional. If empty, the link has no folder and Claude Desktop opens in its default folder. With a folder, Claude Desktop asks you to trust it on every link, even if already trusted."
   },
   "addReplacement": {
     "message": "+ Replacement"
@@ -175,6 +175,12 @@
   },
   "folderRelative": {
     "message": "Heads up: use the full folder path (e.g. `/home/me/project` or `C:\\projects`)."
+  },
+  "nestedQuantifier": {
+    "message": "Heads up: a repetition inside a repeated group (like `(a+)+`) can take seconds on long text and freeze the tab. Prefer a simpler key."
+  },
+  "folderTrust": {
+    "message": "With a folder, Claude Desktop asks you to trust it every time a link opens, even if you already trusted it before."
   },
   "openInClaude": {
     "message": "Open in Claude"

@@ -4,6 +4,9 @@
 
 globalThis.ClaudeLinks ??= (() => {
   const MARK = 'data-claude-link';
+  // Nós de texto maiores que isso são ignorados: protege a aba de uma regex
+  // com backtracking exponencial rodando sobre um texto longo de terceiros.
+  const MAX_TEXT = 5000;
 
   function hostMatches(page) {
     const host = location.hostname;
@@ -21,11 +24,12 @@ globalThis.ClaudeLinks ??= (() => {
     });
   }
 
-  function makeAnchor(text, href) {
+  function makeAnchor(text, href, prompt) {
     const a = document.createElement('a');
     a.href = href;
     a.textContent = text;
-    a.title = chrome.i18n.getMessage('openInClaude');
+    // O título mostra o pedido completo, para conferir antes de clicar.
+    a.title = `${chrome.i18n.getMessage('openInClaude')}:\n${prompt}`;
     a.setAttribute(MARK, '');
     a.style.cssText = 'color:#00a8fc;text-decoration:underline;cursor:pointer';
     // Sites como o Discord interceptam cliques em links; abre o esquema direto.
@@ -51,6 +55,7 @@ globalThis.ClaudeLinks ??= (() => {
   // Troca as ocorrências num nó de texto; devolve quantos links criou.
   function linkify(rules, textNode) {
     const text = textNode.nodeValue;
+    if (text.length > MAX_TEXT) return 0;
     let hit = nextMatch(rules, text, 0);
     if (!hit) return 0;
 
@@ -60,7 +65,7 @@ globalThis.ClaudeLinks ??= (() => {
     while (hit) {
       const { rule, m } = hit;
       frag.append(text.slice(last, m.index));
-      frag.append(makeAnchor(m[0], buildLink(rule, m)));
+      frag.append(makeAnchor(m[0], buildLink(rule, m), buildPrompt(rule, m)));
       count++;
       last = m.index + m[0].length;
       hit = nextMatch(rules, text, last);

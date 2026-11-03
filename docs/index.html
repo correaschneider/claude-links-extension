@@ -141,6 +141,8 @@ git clone https://github.com/correaschneider/claude-links-extension.git
         <div class="alert"><span class="ico">/</span><p><strong>Commands with a slash don’t work in the value.</strong> Claude Desktop replaces the leading slash of <code>q</code> with another character, so the text is not a command. Ask for the skill in words: “Run the skill X on Y”.</p></div>
         <div class="alert"><span class="ico">#</span><p><strong>Discord doesn’t accept these links in a message.</strong> It only makes <code>http(s)</code> links clickable. That’s why the replacement happens in the browser.</p></div>
         <div class="alert"><span class="ico">!</span><p><strong>Confirmation the first time.</strong> The browser asks whether it may open Claude when you click the first <code>claude://</code> link.</p></div>
+        <div class="alert"><span class="ico">⌂</span><p><strong>With a folder, Claude Desktop asks you to trust it on every link,</strong> even if you already trusted it before. Leave the folder empty to skip that prompt.</p></div>
+        <div class="alert"><span class="ico">$</span><p><strong>Text captured by <code>$1</code>, <code>$2</code>… comes from the page,</strong> and anyone in the channel may have written it. Line breaks and invisible characters become spaces and each group is cut at 200 characters. Hover a link to see the full message and review it before pressing Enter.</p></div>
       </div>
     </div>
   </section>

@@ -3,6 +3,23 @@
 Versions follow [Semantic Versioning](https://semver.org/). Each version has a
 `vX.Y.Z` tag and a GitHub release with the zip to upload to the Chrome Web Store.
 
+## [1.1.2] - 2026-11-03
+
+### Security
+- Text captured by `$1`, `$2`… comes from the page and may be written by anyone.
+  Line breaks and control/invisible characters now become spaces and each
+  group is capped at 200 characters before going into the message.
+- The popup no longer loads fonts from Google: nothing is fetched from outside
+  the extension.
+- Text nodes longer than 5,000 characters are skipped, so a regex with
+  exponential backtracking can't freeze the tab on long third-party text; the
+  popup warns about keys with a repetition inside a repeated group, like `(a+)+`.
+
+### Added
+- Hovering a link shows the full message that will go to Claude.
+- Warning that, with a folder, Claude Desktop asks to trust it on every link,
+  even if it was already trusted.
+
 ## [1.1.1] - 2026-11-03
 
 ### Fixed
@@ -41,6 +58,7 @@ Versions follow [Semantic Versioning](https://semver.org/). Each version has a
 - Per-site permission on demand: runs only on domains you added and authorized.
 - Icon, privacy policy and Chrome Web Store listing material.
 
+[1.1.2]: https://github.com/correaschneider/claude-links-extension/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/correaschneider/claude-links-extension/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/correaschneider/claude-links-extension/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/correaschneider/claude-links-extension/releases/tag/v1.0.0

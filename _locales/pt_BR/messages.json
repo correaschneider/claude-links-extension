@@ -36,7 +36,7 @@
     "message": "Pasta"
   },
   "folderTip": {
-    "message": "Opcional. Se ficar vazio, o link não leva pasta e o Claude Desktop abre na pasta padrão."
+    "message": "Opcional. Se ficar vazio, o link não leva pasta e o Claude Desktop abre na pasta padrão. Com pasta, o Claude Desktop pede para confiar nela a cada link, mesmo já autorizada."
   },
   "addReplacement": {
     "message": "+ Substituição"
@@ -175,6 +175,12 @@
   },
   "folderRelative": {
     "message": "Atenção: use o caminho completo da pasta (ex.: `/home/eu/projeto` ou `C:\\projetos`)."
+  },
+  "nestedQuantifier": {
+    "message": "Atenção: repetição dentro de grupo repetido (como `(a+)+`) pode levar segundos em texto longo e travar a aba. Prefira uma chave mais simples."
+  },
+  "folderTrust": {
+    "message": "Com pasta, o Claude Desktop pede para confiar nela toda vez que um link abre, mesmo que você já tenha autorizado antes."
   },
   "openInClaude": {
     "message": "Abrir no Claude"

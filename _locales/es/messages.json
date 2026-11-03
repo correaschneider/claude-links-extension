@@ -36,7 +36,7 @@
     "message": "Carpeta"
   },
   "folderTip": {
-    "message": "Opcional. Si queda vacío, el enlace no lleva carpeta y Claude Desktop abre en su carpeta predeterminada."
+    "message": "Opcional. Si queda vacío, el enlace no lleva carpeta y Claude Desktop abre en su carpeta predeterminada. Con carpeta, Claude Desktop pide confiar en ella en cada enlace, aunque ya esté autorizada."
   },
   "addReplacement": {
     "message": "+ Sustitución"
@@ -175,6 +175,12 @@
   },
   "folderRelative": {
     "message": "Atención: usa la ruta completa de la carpeta (p. ej. `/home/yo/proyecto` o `C:\\proyectos`)."
+  },
+  "nestedQuantifier": {
+    "message": "Atención: una repetición dentro de un grupo repetido (como `(a+)+`) puede tardar segundos en texto largo y bloquear la pestaña. Usa una clave más simple."
+  },
+  "folderTrust": {
+    "message": "Con carpeta, Claude Desktop pide que confíes en ella cada vez que se abre un enlace, aunque ya la hayas autorizado antes."
   },
   "openInClaude": {
     "message": "Abrir en Claude"

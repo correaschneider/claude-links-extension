@@ -88,6 +88,12 @@ para regenerar `_locales/`.
 - **Discord no acepta estos enlaces en un mensaje**: solo hace clicables los
   que empiezan por `http(s)`. Por eso la sustitución ocurre en el navegador.
 - El navegador pide confirmación la primera vez que abre un enlace `claude://`.
+- **Con carpeta, Claude Desktop pide confiar en ella en cada enlace**, aunque ya
+  la hayas autorizado antes. Deja la carpeta vacía para evitar esa pregunta.
+- **El texto capturado por `$1`, `$2`… viene de la página**, y cualquier persona
+  del canal pudo escribirlo. Los saltos de línea y caracteres invisibles se
+  convierten en espacios y cada grupo se corta en 200 caracteres; pasa el ratón
+  por el enlace para ver el mensaje completo y revísalo antes de pulsar Enter.
 
 ## Archivos
 

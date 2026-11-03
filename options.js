@@ -139,8 +139,12 @@ function rowWarnings(row, re) {
   const loose = value.match(/(?<!\\)\{,(\d+)\}/);
   if (loose) warnings.push(t('looseQuant', loose[0], loose[1]));
   if (re && re.test('')) warnings.push(t('matchesEmpty'));
+  // Repetição dentro de grupo repetido, como (a+)+ ou (\w*)*: em texto que
+  // quase casa, a regex pode levar segundos e travar a aba.
+  if (/\((?:[^()\\]|\\.)*[+*}](?:[^()\\]|\\.)*\)[+*{]/.test(value)) warnings.push(t('nestedQuantifier'));
   if (q.startsWith('/')) warnings.push(t('valueSlash'));
   if (folder && !/^(\/|~|[a-zA-Z]:[\\/])/.test(folder)) warnings.push(t('folderRelative'));
+  if (folder) warnings.push(t('folderTrust'));
   return warnings.join(' ');
 }
 

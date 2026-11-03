@@ -60,6 +60,8 @@ T = {
         'lim1': '<strong>Commands with a slash don’t work in the value.</strong> Claude Desktop replaces the leading slash of <code>q</code> with another character, so the text is not a command. Ask for the skill in words: “Run the skill X on Y”.',
         'lim2': '<strong>Discord doesn’t accept these links in a message.</strong> It only makes <code>http(s)</code> links clickable. That’s why the replacement happens in the browser.',
         'lim3': '<strong>Confirmation the first time.</strong> The browser asks whether it may open Claude when you click the first <code>claude://</code> link.',
+        'lim4': '<strong>With a folder, Claude Desktop asks you to trust it on every link,</strong> even if you already trusted it before. Leave the folder empty to skip that prompt.',
+        'lim5': '<strong>Text captured by <code>$1</code>, <code>$2</code>… comes from the page,</strong> and anyone in the channel may have written it. Line breaks and invisible characters become spaces and each group is cut at 200 characters. Hover a link to see the full message and review it before pressing Enter.',
         'privacy': 'Privacy policy',
         'pv_title': 'Privacy policy',
         'pv_lead': 'Claude Links does not collect, send or sell any data. Everything it uses stays in your browser.',
@@ -115,6 +117,8 @@ T = {
         'lim1': '<strong>Comandos com barra não funcionam no valor.</strong> O Claude Desktop troca a barra inicial do <code>q</code> por outro caractere, então o texto não vira comando. Peça a skill em texto: “Rode a skill X na Y”.',
         'lim2': '<strong>O Discord não aceita esses links na mensagem.</strong> Ele só torna clicável o que começa com <code>http(s)</code>. Por isso a troca acontece no navegador.',
         'lim3': '<strong>Confirmação na primeira vez.</strong> O navegador pergunta se pode abrir o Claude ao clicar no primeiro link <code>claude://</code>.',
+        'lim4': '<strong>Com pasta, o Claude Desktop pede para confiar nela a cada link,</strong> mesmo que você já tenha autorizado antes. Deixe a pasta vazia para evitar essa pergunta.',
+        'lim5': '<strong>O texto capturado por <code>$1</code>, <code>$2</code>… vem da página,</strong> e qualquer pessoa do canal pode tê-lo escrito. Quebras de linha e caracteres invisíveis viram espaço e cada grupo é cortado em 200 caracteres. Passe o mouse no link para ver a mensagem completa e confira antes de apertar Enter.',
         'privacy': 'Política de privacidade',
         'pv_title': 'Política de privacidade',
         'pv_lead': 'A Claude Links não coleta, não envia e não vende nenhum dado. Tudo o que ela usa fica no seu navegador.',
@@ -170,6 +174,8 @@ T = {
         'lim1': '<strong>Comandos com barra não funcionam no valor.</strong> O Claude Desktop substitui a barra inicial do <code>q</code> por outro carácter, por isso o texto não é um comando. Peça a skill por texto: “Executa a skill X na Y”.',
         'lim2': '<strong>O Discord não aceita estas ligações na mensagem.</strong> Só torna clicáveis as que começam por <code>http(s)</code>. Por isso a substituição acontece no navegador.',
         'lim3': '<strong>Confirmação na primeira vez.</strong> O navegador pergunta se pode abrir o Claude ao clicar na primeira ligação <code>claude://</code>.',
+        'lim4': '<strong>Com pasta, o Claude Desktop pede para confiar nela em cada ligação,</strong> mesmo que já a tenha autorizado antes. Deixe a pasta vazia para evitar essa pergunta.',
+        'lim5': '<strong>O texto capturado por <code>$1</code>, <code>$2</code>… vem da página,</strong> e qualquer pessoa do canal pode tê-lo escrito. Quebras de linha e caracteres invisíveis passam a espaço e cada grupo é cortado em 200 caracteres. Passe o rato sobre a ligação para ver a mensagem completa e verifique-a antes de premir Enter.',
         'privacy': 'Política de privacidade',
         'pv_title': 'Política de privacidade',
         'pv_lead': 'A Claude Links não recolhe, não envia e não vende quaisquer dados. Tudo o que utiliza fica no seu navegador.',
@@ -225,6 +231,8 @@ T = {
         'lim1': '<strong>Los comandos con barra no funcionan en el valor.</strong> Claude Desktop reemplaza la barra inicial de <code>q</code> por otro carácter, así que el texto no es un comando. Pide la skill con texto: “Ejecuta la skill X en Y”.',
         'lim2': '<strong>Discord no acepta estos enlaces en un mensaje.</strong> Solo hace clicables los que empiezan por <code>http(s)</code>. Por eso la sustitución ocurre en el navegador.',
         'lim3': '<strong>Confirmación la primera vez.</strong> El navegador pregunta si puede abrir Claude al hacer clic en el primer enlace <code>claude://</code>.',
+        'lim4': '<strong>Con carpeta, Claude Desktop pide confiar en ella en cada enlace,</strong> aunque ya la hayas autorizado antes. Deja la carpeta vacía para evitar esa pregunta.',
+        'lim5': '<strong>El texto capturado por <code>$1</code>, <code>$2</code>… viene de la página,</strong> y cualquier persona del canal pudo escribirlo. Los saltos de línea y caracteres invisibles se convierten en espacios y cada grupo se corta en 200 caracteres. Pasa el ratón por el enlace para ver el mensaje completo y revísalo antes de pulsar Enter.',
         'privacy': 'Política de privacidad',
         'pv_title': 'Política de privacidad',
         'pv_lead': 'Claude Links no recopila, no envía ni vende ningún dato. Todo lo que usa se queda en tu navegador.',
@@ -280,6 +288,8 @@ T = {
         'lim1': '<strong>I comandi con la barra non funzionano nel valore.</strong> Claude Desktop sostituisce la barra iniziale di <code>q</code> con un altro carattere, quindi il testo non è un comando. Chiedi la skill a parole: “Esegui la skill X su Y”.',
         'lim2': '<strong>Discord non accetta questi link in un messaggio.</strong> Rende cliccabili solo quelli che iniziano con <code>http(s)</code>. Per questo la sostituzione avviene nel browser.',
         'lim3': '<strong>Conferma la prima volta.</strong> Il browser chiede se può aprire Claude quando clicchi sul primo link <code>claude://</code>.',
+        'lim4': '<strong>Con una cartella, Claude Desktop chiede di considerarla attendibile a ogni link,</strong> anche se l’hai già autorizzata. Lascia la cartella vuota per evitare la domanda.',
+        'lim5': '<strong>Il testo catturato da <code>$1</code>, <code>$2</code>… viene dalla pagina,</strong> e chiunque nel canale può averlo scritto. A capo e caratteri invisibili diventano spazi e ogni gruppo viene tagliato a 200 caratteri. Passa il mouse sul link per vedere il messaggio completo e controllalo prima di premere Invio.',
         'privacy': 'Informativa sulla privacy',
         'pv_title': 'Informativa sulla privacy',
         'pv_lead': 'Claude Links non raccoglie, non invia e non vende alcun dato. Tutto ciò che usa resta nel tuo browser.',
@@ -452,6 +462,8 @@ git clone {repo}.git
         <div class="alert"><span class="ico">/</span><p>{lim1}</p></div>
         <div class="alert"><span class="ico">#</span><p>{lim2}</p></div>
         <div class="alert"><span class="ico">!</span><p>{lim3}</p></div>
+        <div class="alert"><span class="ico">⌂</span><p>{lim4}</p></div>
+        <div class="alert"><span class="ico">$</span><p>{lim5}</p></div>
       </div>
     </div>
   </section>
