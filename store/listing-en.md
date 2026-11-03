@@ -35,8 +35,9 @@ Developer Tools
 | Field | File |
 |-------|------|
 | Store icon (128×128) | `store/upload/icon-128.png` |
-| Screenshots (1280×800) | `store/upload/screenshot-1-in-context.png`, `store/upload/screenshot-2-before-after.png` |
+| Screenshots (1280×800), localized and global | `store/upload/screenshot-1-in-context.png`, `store/upload/screenshot-2-before-after.png`, `store/upload/screenshot-3-popup.png` |
 | Small promo tile (440×280) | `store/upload/promo-440x280.png` |
+| Marquee promo tile (1400×560, optional) | `store/upload/marquee-1400x560.png` |
 
 ## Additional fields
 
