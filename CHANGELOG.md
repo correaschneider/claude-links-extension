@@ -3,6 +3,13 @@
 Versions follow [Semantic Versioning](https://semver.org/). Each version has a
 `vX.Y.Z` tag and a GitHub release with the zip to upload to the Chrome Web Store.
 
+## [1.1.3] - 2026-11-03
+
+### Fixed
+- 128×128 icon follows the Chrome Web Store guidelines: artwork in 96×96 with
+  16 px of transparent padding, and a lighter outline so it stands out on dark
+  themes. The 16/32/48 toolbar icons stay full-bleed.
+
 ## [1.1.2] - 2026-11-03
 
 ### Security
@@ -58,6 +65,7 @@ Versions follow [Semantic Versioning](https://semver.org/). Each version has a
 - Per-site permission on demand: runs only on domains you added and authorized.
 - Icon, privacy policy and Chrome Web Store listing material.
 
+[1.1.3]: https://github.com/correaschneider/claude-links-extension/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/correaschneider/claude-links-extension/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/correaschneider/claude-links-extension/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/correaschneider/claude-links-extension/compare/v1.0.0...v1.1.0

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <!-- Ícone de 128 para a loja: desenho em 96x96 com 16 px de margem transparente -->
+  <g transform="translate(16 16) scale(0.75)">
+  <!-- Claude Links: colchetes de código com um elo no centro (paleta blueGrey) -->
+  <defs>
+    <!-- Metade de baixo (no eixo do elo), para o elo A passar por cima do B -->
+    <clipPath id="lower">
+      <rect x="0" y="64" width="128" height="64"/>
+    </clipPath>
+  </defs>
+
+  <rect x="1" y="1" width="126" height="126" rx="23" fill="#263238" stroke="#455a64" stroke-width="2"/>
+
+  <!-- < > -->
+  <g fill="none" stroke="#90a4ae" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="40,28 13,64 40,100"/>
+    <polyline points="88,28 115,64 88,100"/>
+  </g>
+
+  <!-- Elo: dois anéis entrelaçados, girados 45° -->
+  <g transform="rotate(-45 64 64)" fill="none" stroke-linecap="round">
+    <!-- anel A -->
+    <rect x="37" y="55" width="30" height="18" rx="9" stroke="#eceff1" stroke-width="7"/>
+    <!-- anel B, com contorno da cor do fundo para abrir o vão -->
+    <rect x="61" y="55" width="30" height="18" rx="9" stroke="#263238" stroke-width="13"/>
+    <rect x="61" y="55" width="30" height="18" rx="9" stroke="#eceff1" stroke-width="7"/>
+    <!-- anel A de novo, só embaixo: entrelaçamento -->
+    <g clip-path="url(#lower)">
+      <rect x="37" y="55" width="30" height="18" rx="9" stroke="#263238" stroke-width="13"/>
+      <rect x="37" y="55" width="30" height="18" rx="9" stroke="#eceff1" stroke-width="7"/>
+    </g>
+  </g>
+</g>
+</svg>
