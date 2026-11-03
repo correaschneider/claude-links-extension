@@ -21,7 +21,9 @@ d['version'] = sys.argv[1]
 open('manifest.json', 'w').write(json.dumps(d, indent=2, ensure_ascii=False) + '\n')
 EOF
 
-zip=$(./build.sh | head -1)
+# Sem pipe para head: com pipefail, o SIGPIPE do build.sh derrubaria o script.
+build_out=$(./build.sh)
+zip=${build_out%%$'\n'*}
 
 # Nota do release = seção da versão no CHANGELOG.
 notes=$(awk -v v="$version" '
