@@ -1,14 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <!-- Ícone de 128 para a loja: desenho em 96x96 com 16 px de margem transparente -->
+  <!-- Desenho-fonte do ícone de 128 da loja (a loja aceita só PNG: icon-128.png).
+       Desenho em 96x96 com 16 px de margem transparente. -->
   <g transform="translate(16 16) scale(0.75)">
   <!-- Claude Links: colchetes de código com um elo no centro (paleta blueGrey) -->
-  <defs>
-    <!-- Metade de baixo (no eixo do elo), para o elo A passar por cima do B -->
-    <clipPath id="lower">
-      <rect x="0" y="64" width="128" height="64"/>
-    </clipPath>
-  </defs>
-
   <rect x="1" y="1" width="126" height="126" rx="23" fill="#263238" stroke="#455a64" stroke-width="2"/>
 
   <!-- < > -->
@@ -17,18 +11,9 @@
     <polyline points="88,28 115,64 88,100"/>
   </g>
 
-  <!-- Elo: dois anéis entrelaçados, girados 45° -->
-  <g transform="rotate(-45 64 64)" fill="none" stroke-linecap="round">
-    <!-- anel A -->
-    <rect x="37" y="55" width="30" height="18" rx="9" stroke="#eceff1" stroke-width="7"/>
-    <!-- anel B, com contorno da cor do fundo para abrir o vão -->
-    <rect x="61" y="55" width="30" height="18" rx="9" stroke="#263238" stroke-width="13"/>
-    <rect x="61" y="55" width="30" height="18" rx="9" stroke="#eceff1" stroke-width="7"/>
-    <!-- anel A de novo, só embaixo: entrelaçamento -->
-    <g clip-path="url(#lower)">
-      <rect x="37" y="55" width="30" height="18" rx="9" stroke="#263238" stroke-width="13"/>
-      <rect x="37" y="55" width="30" height="18" rx="9" stroke="#eceff1" stroke-width="7"/>
-    </g>
-  </g>
+  <!-- Elo: ícone "link" do Material Icons (Apache 2.0), girado 45°. Formas
+       preenchidas e sem sobreposição: nada de vão/recorte que deixe marca. -->
+  <path transform="translate(64 64) rotate(-45) scale(2.9) translate(-12 -12)" fill="#eceff1"
+        d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
 </g>
 </svg>

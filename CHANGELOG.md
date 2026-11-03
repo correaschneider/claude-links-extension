@@ -3,6 +3,14 @@
 Versions follow [Semantic Versioning](https://semver.org/). Each version has a
 `vX.Y.Z` tag and a GitHub release with the zip to upload to the Chrome Web Store.
 
+## [1.1.4] - 2026-11-03
+
+### Fixed
+- Icon: the hand-drawn interlocking link left a thin seam on one ring. The link
+  is now the Material Icons "link" glyph (Apache 2.0): filled shapes with no
+  overlap, crisp from 16 to 128 px. Icons are rendered with Chrome.
+- Promo tile uses the new icon and English text.
+
 ## [1.1.3] - 2026-11-03
 
 ### Fixed
@@ -65,6 +73,7 @@ Versions follow [Semantic Versioning](https://semver.org/). Each version has a
 - Per-site permission on demand: runs only on domains you added and authorized.
 - Icon, privacy policy and Chrome Web Store listing material.
 
+[1.1.4]: https://github.com/correaschneider/claude-links-extension/compare/v1.1.3...v1.1.4
 [1.1.3]: https://github.com/correaschneider/claude-links-extension/compare/v1.1.2...v1.1.3
 [1.1.2]: https://github.com/correaschneider/claude-links-extension/compare/v1.1.1...v1.1.2
 [1.1.1]: https://github.com/correaschneider/claude-links-extension/compare/v1.1.0...v1.1.1
