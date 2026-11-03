@@ -57,6 +57,11 @@ Exemplo de regra para o Discord:
 |-------|-------|--------|
 | `/(triagem\|abrir-chamado)\s+([A-Z][A-Z0-9]*-\d+)` | `Rode a skill $1 na $2` | *(vazio)* |
 
+A chave é validada enquanto você digita: regex inválida fica marcada, com o
+erro logo abaixo. O botão **▶** de cada linha abre o Claude na hora com aquele
+valor; se o valor usa `$1`, `$2`…, ele pede um texto de exemplo, mostra o que
+casou com a chave e abre com os grupos preenchidos.
+
 Ao clicar em **Salvar**, o navegador pede permissão para a extensão rodar
 naquele domínio. Página sem permissão aparece marcada como "sem permissão" na
 lista; é só abrir e salvar de novo. Deletar a página devolve a permissão.
@@ -80,6 +85,7 @@ coletado nem enviado ([política de privacidade](https://correaschneider.github.
 | `manifest.json` | Manifesto (Manifest V3). |
 | `background.js` | Registra o content script só nos domínios autorizados. |
 | `content.js` | Encontra os textos e cria os links. |
+| `link.js` | Monta o link `claude://` (usado pelo content script e pelo popup). |
 | `defaults.js` | Config inicial (vazia). |
 | `options.html` / `options.js` | Popup com a lista de páginas e o formulário. |
 | `icons/` | Ícone em SVG e PNGs 16/32/48/128. |

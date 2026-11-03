@@ -64,13 +64,78 @@ function showList() {
 
 // ---- Formulário ----
 
+// Valida a chave enquanto digita; devolve o RegExp ou null.
+function checkMatch(row) {
+  const input = row.querySelector('.match');
+  const msg = row.querySelector('.row-msg');
+  const value = input.value.trim();
+  let re = null;
+  let error = '';
+  if (value) {
+    try { re = new RegExp(value); } catch (e) { error = `Regex inválida: ${e.message}`; }
+  }
+  input.classList.toggle('invalid', Boolean(error));
+  msg.textContent = error;
+  msg.hidden = !error;
+  return re;
+}
+
+function rowRule(row) {
+  return {
+    q: row.querySelector('.q').value.trim(),
+    folder: row.querySelector('.folder').value.trim(),
+  };
+}
+
+// Abre o deep link pela aba atual: o navegador entrega o claude:// ao sistema
+// sem sair da página.
+function openLink(url) {
+  chrome.tabs.update({ url }).catch(() => { window.location.href = url; });
+}
+
+// Preenche $1, $2… a partir do texto de exemplo e mostra o que casou.
+function testSample(row) {
+  const re = checkMatch(row);
+  const result = row.querySelector('.result');
+  const sample = row.querySelector('.sample').value;
+  const m = re && sample ? sample.match(re) : null;
+  result.textContent = !sample ? '' : m ? `casou: ${m[0]}` : 'não casou com a chave';
+  return m;
+}
+
+function runRep(row) {
+  const rule = rowRule(row);
+  if (!rule.q) {
+    row.querySelector('.q').classList.add('invalid');
+    row.querySelector('.q').focus();
+    return;
+  }
+  row.querySelector('.q').classList.remove('invalid');
+  const test = row.querySelector('.row-test');
+  // Sem $n, abre direto; com $n, pede um texto de exemplo.
+  if (!/\$\d/.test(rule.q)) {
+    test.hidden = true;
+    return openLink(buildLink(rule));
+  }
+  test.hidden = !test.hidden;
+  if (!test.hidden) row.querySelector('.sample').focus();
+}
+
 function addRep(r = {}) {
   const row = tplRep.content.firstElementChild.cloneNode(true);
   row.querySelector('.match').value = r.match || '';
   row.querySelector('.q').value = r.q || '';
   row.querySelector('.folder').value = r.folder || '';
+  row.querySelector('.match').addEventListener('input', () => { checkMatch(row); testSample(row); });
+  row.querySelector('.sample').addEventListener('input', () => testSample(row));
+  row.querySelector('.run-rep').addEventListener('click', () => runRep(row));
+  row.querySelector('.run-sample').addEventListener('click', () => {
+    const m = testSample(row);
+    if (m) openLink(buildLink(rowRule(row), m));
+  });
   row.querySelector('.del-rep').addEventListener('click', () => row.remove());
   $('reps').append(row);
+  checkMatch(row);
 }
 
 function openForm(index, host = '') {
@@ -89,7 +154,7 @@ function openForm(index, host = '') {
 
 // Lê o formulário; marca o primeiro campo inválido e lança erro.
 function collect() {
-  document.querySelectorAll('input.invalid').forEach((i) => i.classList.remove('invalid'));
+  document.querySelectorAll('#host, .q').forEach((i) => i.classList.remove('invalid'));
   const fail = (input, msg) => { input.classList.add('invalid'); input.focus(); throw new Error(msg); };
 
   const page = $('host').value.trim();
@@ -103,7 +168,7 @@ function collect() {
     if (!match && !q && !folder) return []; // linha vazia é ignorada
     if (!match) fail(mEl, 'falta a chave');
     if (!q) fail(qEl, 'falta o valor');
-    try { new RegExp(match); } catch (e) { fail(mEl, `regex inválida (${e.message})`); }
+    if (!checkMatch(row)) fail(mEl, 'regex inválida na chave');
     return [folder ? { match, q, folder } : { match, q }];
   });
   return { page, replacements };

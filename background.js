@@ -23,7 +23,7 @@ async function sync() {
   await chrome.scripting.registerContentScripts([{
     id: SCRIPT_ID,
     matches,
-    js: ['defaults.js', 'content.js'],
+    js: ['defaults.js', 'link.js', 'content.js'],
     runAt: 'document_idle',
   }]);
 }

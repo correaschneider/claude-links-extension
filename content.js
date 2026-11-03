@@ -9,14 +9,6 @@ function hostMatches(page) {
   return host === page || host.endsWith(`.${page}`);
 }
 
-function buildLink(rule, m) {
-  const q = rule.q.replace(/\$(\d+)/g, (_, n) => m[n] ?? '');
-  let url = `claude://code/new?q=${encodeURIComponent(q)}`;
-  // Sem folder, o Desktop abre na pasta padrão.
-  if (rule.folder) url += `&folder=${encodeURIComponent(rule.folder)}`;
-  return url;
-}
-
 function compile(rules) {
   return rules.flatMap((r) => {
     try {

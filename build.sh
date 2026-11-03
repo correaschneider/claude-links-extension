@@ -6,7 +6,7 @@ version=$(python3 -c 'import json;print(json.load(open("manifest.json"))["versio
 mkdir -p dist
 out="dist/claude-links-$version.zip"
 rm -f "$out"
-zip -q -r "$out" manifest.json background.js content.js defaults.js options.html options.js \
+zip -q -r "$out" manifest.json background.js content.js defaults.js link.js options.html options.js \
   icons/icon-16.png icons/icon-32.png icons/icon-48.png icons/icon-128.png
 echo "$out"
 unzip -l "$out" | tail -n +4 | head -n -2
