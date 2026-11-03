@@ -65,11 +65,36 @@ function showList() {
 // ---- Formulário ----
 
 // Mensagem abaixo da linha: erro (escuro) ou resultado do ▶ (neutro).
+// Trechos entre `crases` viram <code>.
 function rowMessage(row, text, isError) {
   const msg = row.querySelector('.row-msg');
-  msg.textContent = text;
+  msg.replaceChildren(...text.split('`').map((part, i) => {
+    if (i % 2 === 0) return part;
+    const code = document.createElement('code');
+    code.textContent = part;
+    return code;
+  }));
   msg.classList.toggle('info', !isError);
   msg.hidden = !text;
+}
+
+// O erro nativo repete a regex entre barras (/…/) e fica confuso; fica só o
+// motivo, em português quando é um dos casos comuns.
+const REGEX_ERRORS = [
+  [/\\ at end of pattern/, 'barra invertida `\\` sobrando no fim'],
+  [/Unterminated group/, 'parêntese `(` aberto sem fechar'],
+  [/Unmatched '\)'/, 'parêntese `)` fechando sem abrir'],
+  [/Unterminated character class/, 'colchete `[` aberto sem fechar'],
+  [/Nothing to repeat/, '`*`, `+`, `?` ou `{n}` sem nada antes para repetir'],
+  [/numbers out of order/, 'intervalo `{min,max}` com o mínimo maior que o máximo'],
+  [/Range out of order/, 'intervalo em `[a-z]` com o início depois do fim'],
+  [/Invalid group/, 'grupo `(?…)` com sintaxe inválida'],
+];
+
+function regexError(e) {
+  const reason = e.message.replace(/^Invalid regular expression: \/.*\/[a-z]*: /, '');
+  const known = REGEX_ERRORS.find(([pattern]) => pattern.test(reason));
+  return `Regex inválida: ${known ? known[1] : reason}.`;
 }
 
 // Valida a chave enquanto digita; devolve o RegExp ou null.
@@ -79,10 +104,18 @@ function checkMatch(row) {
   let re = null;
   let error = '';
   if (value) {
-    try { re = new RegExp(value); } catch (e) { error = `Regex inválida: ${e.message}`; }
+    try { re = new RegExp(value); } catch (e) { error = regexError(e); }
   }
   input.classList.toggle('invalid', Boolean(error));
-  rowMessage(row, error, true);
+  if (error) {
+    rowMessage(row, error, true);
+  } else {
+    // `{,n}` é válido mas não repete nada: casa o texto "{,n}" literal.
+    const loose = value.match(/(?<!\\)\{,(\d+)\}/);
+    rowMessage(row, loose
+      ? `Atenção: \`${loose[0]}\` não é quantificador aqui, procura o texto "${loose[0]}". Use \`{0,${loose[1]}}\` ou \`{1,${loose[1]}}\`.`
+      : '', false);
+  }
   return re;
 }
 
@@ -107,7 +140,7 @@ async function runOnPage(row) {
   let host = '';
   try { host = new URL(tab.url).hostname; } catch { /* aba sem URL legível */ }
   if (!host || !(host === page || host.endsWith(`.${page}`))) {
-    return rowMessage(row, `Abra uma aba em ${page || 'o domínio da página'} e clique no ícone da extensão para executar.`, true);
+    return rowMessage(row, `Abra uma aba em \`${page || "o domínio da página"}\` e clique no ícone da extensão para executar.`, true);
   }
 
   try {
