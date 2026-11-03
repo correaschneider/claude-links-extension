@@ -1,0 +1,161 @@
+{
+  "extDescription": {
+    "message": "Transforma textos de qualquer página em ligações que abrem uma sessão no Claude Desktop com a mensagem pronta."
+  },
+  "pagesKicker": {
+    "message": "// páginas"
+  },
+  "addPage": {
+    "message": "Adicionar página"
+  },
+  "emptyList": {
+    "message": "Nenhuma página. Clique em + para adicionar."
+  },
+  "back": {
+    "message": "← Voltar"
+  },
+  "newPage": {
+    "message": "Nova página"
+  },
+  "pageLabel": {
+    "message": "Página"
+  },
+  "domainLabel": {
+    "message": "Domínio"
+  },
+  "replacementsLabel": {
+    "message": "Substituições"
+  },
+  "colKey": {
+    "message": "Chave (regex)"
+  },
+  "colValue": {
+    "message": "Valor · $$1, $$2…"
+  },
+  "colFolder": {
+    "message": "Pasta"
+  },
+  "folderTip": {
+    "message": "Opcional. Se ficar vazio, a ligação não leva pasta e o Claude Desktop abre na pasta predefinida."
+  },
+  "addReplacement": {
+    "message": "+ Substituição"
+  },
+  "deletePage": {
+    "message": "Eliminar página"
+  },
+  "save": {
+    "message": "Guardar"
+  },
+  "hintSlash": {
+    "message": "Começar o valor com “/” não funciona: o Claude Desktop substitui a barra. Peça a skill por texto, ex.: “Executa a skill X na Y”."
+  },
+  "phKey": {
+    "message": "/(triagem)\\s+(TASK-\\d+)"
+  },
+  "phValue": {
+    "message": "Executa a skill $$1 na $$2"
+  },
+  "phFolder": {
+    "message": "(pasta predefinida)"
+  },
+  "runTitle": {
+    "message": "Executar agora: aplica esta regra no separador aberto"
+  },
+  "deleteRepTitle": {
+    "message": "Eliminar substituição"
+  },
+  "countOne": {
+    "message": "1 substituição"
+  },
+  "countMany": {
+    "message": "{0} substituições"
+  },
+  "noPerm": {
+    "message": "sem permissão"
+  },
+  "noPermTitle": {
+    "message": "Abra a página e clique em Guardar para permitir a extensão neste site."
+  },
+  "regexInvalid": {
+    "message": "Regex inválida: {0}."
+  },
+  "reBackslash": {
+    "message": "barra invertida `\\` a mais no fim"
+  },
+  "reGroupOpen": {
+    "message": "parêntese `(` aberto sem fechar"
+  },
+  "reGroupClose": {
+    "message": "parêntese `)` a fechar sem abrir"
+  },
+  "reClass": {
+    "message": "parêntese reto `[` aberto sem fechar"
+  },
+  "reNothing": {
+    "message": "`*`, `+`, `?` ou `{n}` sem nada antes para repetir"
+  },
+  "reRangeNum": {
+    "message": "intervalo `{min,max}` com o mínimo maior que o máximo"
+  },
+  "reRangeChar": {
+    "message": "intervalo em `[a-z]` com o início depois do fim"
+  },
+  "reGroupInvalid": {
+    "message": "grupo `(?…)` com sintaxe inválida"
+  },
+  "looseQuant": {
+    "message": "Atenção: `{0}` não é quantificador aqui, procura o texto \"{0}\". Use `{0,{1}}` ou `{1,{1}}`."
+  },
+  "fillKey": {
+    "message": "Preencha uma chave válida."
+  },
+  "fillValue": {
+    "message": "Preencha o valor."
+  },
+  "openTab": {
+    "message": "Abra um separador em `{0}` e clique no ícone da extensão para executar."
+  },
+  "theDomain": {
+    "message": "o domínio da página"
+  },
+  "runOne": {
+    "message": "1 trecho passou a ligação neste separador."
+  },
+  "runMany": {
+    "message": "{0} trechos passaram a ligação neste separador."
+  },
+  "noMatch": {
+    "message": "A chave não corresponde a nenhum texto visível deste separador. Verifique a regex."
+  },
+  "allLinked": {
+    "message": "Os {0} trechos que correspondem já são ligações."
+  },
+  "splitText": {
+    "message": "A chave corresponde {0} vez(es) no texto, mas o trecho está dividido entre elementos da página (ex.: parte a negrito ou ligação) e não passou a ligação."
+  },
+  "runFailed": {
+    "message": "Não foi possível executar no separador: {0}"
+  },
+  "errMissingDomain": {
+    "message": "falta o domínio da página"
+  },
+  "errMissingKey": {
+    "message": "falta a chave"
+  },
+  "errMissingValue": {
+    "message": "falta o valor"
+  },
+  "errInvalidKey": {
+    "message": "regex inválida na chave"
+  },
+  "notSaved": {
+    "message": "Não guardado: {0}"
+  },
+  "confirmDelete": {
+    "message": "Eliminar {0}?"
+  },
+  "openInClaude": {
+    "message": "Abrir no Claude"
+  }
+}

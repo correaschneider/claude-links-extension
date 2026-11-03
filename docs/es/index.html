@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Links</title>
+<meta name="description" content="Extensión para Chrome/Brave que convierte textos de una página en enlaces que abren una sesión en Claude Desktop con el mensaje listo.">
+<link rel="alternate" hreflang="en" href="https://correaschneider.github.io/claude-links-extension/">
+<link rel="alternate" hreflang="pt-BR" href="https://correaschneider.github.io/claude-links-extension/pt-br/">
+<link rel="alternate" hreflang="pt-PT" href="https://correaschneider.github.io/claude-links-extension/pt/">
+<link rel="alternate" hreflang="es" href="https://correaschneider.github.io/claude-links-extension/es/">
+<link rel="alternate" hreflang="it" href="https://correaschneider.github.io/claude-links-extension/it/">
+<link rel="alternate" hreflang="x-default" href="https://correaschneider.github.io/claude-links-extension/">
+<link rel="icon" type="image/svg+xml" href="../icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="appbar">
+  <div class="inner">
+    <a class="brand" href="./"><img src="../icon.svg" alt="" width="28" height="28" style="vertical-align:middle;margin-right:10px;border-radius:5px">Claude Links</a>
+    <nav>
+      <a href="./#how">Cómo funciona</a>
+      <a href="./#install">Instalación</a>
+      <a href="./#config">Configuración</a>
+      <a href="https://github.com/correaschneider/claude-links-extension">GitHub</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Language">Español ▾</summary>
+      <ul><li><a href="../" hreflang="en">English</a></li><li><a href="../pt-br/" hreflang="pt-BR">Português (Brasil)</a></li><li><a href="../pt/" hreflang="pt-PT">Português (Portugal)</a></li><li><a href="../es/" hreflang="es" aria-current="page">Español</a></li><li><a href="../it/" hreflang="it">Italiano</a></li></ul>
+    </details>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="container">
+    <p class="kicker">// extensión chrome · brave</p>
+    <h1>Del texto en la página a una sesión de Claude, en un clic.</h1>
+    <p class="lead">Claude Links encuentra textos que defines con una regex y los convierte en enlaces que abren una nueva sesión en la pestaña Code de Claude Desktop, con el mensaje ya escrito.</p>
+    <div class="actions">
+      <a class="btn btn-contained" href="https://github.com/correaschneider/claude-links-extension">Ver en GitHub</a>
+      <a class="btn btn-outlined" href="#install">Instalar</a>
+    </div>
+  </div>
+</div>
+
+<main>
+  <section id="how">
+    <div class="container">
+      <p class="kicker">// cómo funciona</p>
+      <h2>Un aviso se convierte en atajo</h2>
+      <p class="section-sub">Una automatización publica en Discord un aviso con un comando en texto. Con una regla configurada, el comando se convierte en enlace; el clic abre Claude con la petición lista.</p>
+
+      <div class="compare">
+        <div class="paper">
+          <p class="label">Antes · texto plano</p>
+          <div class="rule-line rule-before"></div>
+          <p class="msg"><b>[TASK-123] Error al enviar el mensaje</b></p>
+          <p class="msg">Hacer el triaje con <span class="plain">/triaje TASK-123</span></p>
+        </div>
+        <div class="arrow" aria-hidden="true">→</div>
+        <div class="paper">
+          <p class="label">Después · enlace</p>
+          <div class="rule-line rule-after"></div>
+          <p class="msg"><b>[TASK-123] Error al enviar el mensaje</b></p>
+          <p class="msg">Hacer el triaje con <span class="fake-link">/triaje TASK-123</span></p>
+          <div class="composer"><small>Claude Desktop · nueva sesión</small>Ejecuta la skill triaje en TASK-123</div>
+        </div>
+      </div>
+
+      <div class="steps" style="margin-top:32px">
+        <div class="paper step"><h3>Encuentra</h3><p>El script se ejecuta en las páginas que añadiste y sigue el contenido que va llegando, como los mensajes nuevos de Discord.</p></div>
+        <div class="paper step"><h3>Sustituye</h3><p>Cada coincidencia de una regla se convierte en un enlace <code>claude://code/new</code>, construido con el valor y la carpeta de la regla.</p></div>
+        <div class="paper step"><h3>Abre</h3><p>El clic abre una sesión de Claude Desktop con el mensaje escrito. No se envía nada solo: lo revisas y pulsas Enter.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="container">
+      <p class="kicker">// instalación</p>
+      <h2>Cargar en el navegador</h2>
+      <p class="section-sub">Mientras no esté en Chrome Web Store, la extensión se carga desde el código fuente.</p>
+      <div class="two">
+        <div class="paper">
+          <p class="label">Paso a paso</p>
+          <div class="rule-line rule-after"></div>
+          <ol class="install"><li>Descarga o clona el <a href="https://github.com/correaschneider/claude-links-extension">repositorio</a>.</li><li>Abre <code>brave://extensions</code> o <code>chrome://extensions</code>.</li><li>Activa el <strong>Modo de desarrollador</strong>.</li><li>Haz clic en <strong>Cargar descomprimida</strong> y elige la carpeta.</li><li>Fija el icono de la extensión en la barra.</li></ol>
+        </div>
+        <div class="paper">
+          <p class="label">Desde la terminal</p>
+          <div class="rule-line rule-after"></div>
+          <pre><span class="c"># clona el código</span>
+git clone https://github.com/correaschneider/claude-links-extension.git
+
+<span class="c"># después de cambiar archivos:</span>
+<span class="c"># ↻ en la extensión + recargar la pestaña</span></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="config">
+    <div class="container">
+      <p class="kicker">// configuración</p>
+      <h2>Reglas por página</h2>
+      <p class="section-sub">Haz clic en el icono de la extensión para ver la lista de páginas. El botón <strong>+</strong> añade una nueva, con el dominio de la pestaña actual ya rellenado. Al guardar, el navegador pide permiso para que la extensión se ejecute en ese sitio; sin él, la extensión no toca la página.</p>
+
+      <div class="paper table-wrap">
+        <table>
+          <thead><tr><th>Campo</th><th>Qué es</th></tr></thead>
+          <tbody>
+            <tr><td>Página</td><td>Dominio donde se aplican las reglas, p. ej. <code>discord.com</code>. Los subdominios también coinciden.</td></tr>
+            <tr><td>Clave</td><td>Regex que encuentra el texto a sustituir. Se valida mientras escribes.</td></tr>
+            <tr><td>Valor</td><td>Mensaje que se envía a Claude (parámetro <code>q</code>). Acepta <code>$1</code>, <code>$2</code>… de los grupos de la clave.</td></tr>
+            <tr><td>Carpeta</td><td>Opcional. Carpeta donde se abre la sesión. Vacío = carpeta predeterminada de Claude Desktop.</td></tr>
+            <tr><td>▶</td><td>Aplica la regla al momento en la pestaña abierta, sin guardar, e indica cuántas coincidencias se convirtieron en enlaces.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="paper" style="margin-top:20px">
+        <p class="label">Ejemplo de regla</p>
+        <div class="rule-line rule-after"></div>
+        <pre><span class="c">clave</span>  /(triaje|abrir-ticket)\s+([A-Z][A-Z0-9]*-\d+)
+<span class="c">valor</span>  Ejecuta la skill $1 en $2
+<span class="c">enlace</span>  claude://code/new?q=Ejecuta%20la%20skill%20triaje%20en%20TASK-123</pre>
+      </div>
+    </div>
+  </section>
+
+  <section id="limits">
+    <div class="container">
+      <p class="kicker">// limitaciones</p>
+      <h2>Conviene saber</h2>
+      <p class="section-sub">Comportamientos de Claude Desktop y de los sitios que dieron forma a la extensión.</p>
+      <div class="alerts">
+        <div class="alert"><span class="ico">/</span><p><strong>Los comandos con barra no funcionan en el valor.</strong> Claude Desktop reemplaza la barra inicial de <code>q</code> por otro carácter, así que el texto no es un comando. Pide la skill con texto: “Ejecuta la skill X en Y”.</p></div>
+        <div class="alert"><span class="ico">#</span><p><strong>Discord no acepta estos enlaces en un mensaje.</strong> Solo hace clicables los que empiezan por <code>http(s)</code>. Por eso la sustitución ocurre en el navegador.</p></div>
+        <div class="alert"><span class="ico">!</span><p><strong>Confirmación la primera vez.</strong> El navegador pregunta si puede abrir Claude al hacer clic en el primer enlace <code>claude://</code>.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <span class="stack"><a href="privacy.html">Política de privacidad</a> · Manifest V3 · JavaScript · chrome.storage · claude:// deep links</span>
+    <a href="https://github.com/correaschneider/claude-links-extension">correaschneider/claude-links-extension</a>
+  </div>
+</footer>
+
+</body>
+</html>

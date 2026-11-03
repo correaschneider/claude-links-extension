@@ -1,0 +1,161 @@
+{
+  "extDescription": {
+    "message": "Convierte textos de cualquier página en enlaces que abren una sesión en Claude Desktop con el mensaje listo."
+  },
+  "pagesKicker": {
+    "message": "// páginas"
+  },
+  "addPage": {
+    "message": "Añadir página"
+  },
+  "emptyList": {
+    "message": "No hay páginas. Haz clic en + para añadir una."
+  },
+  "back": {
+    "message": "← Volver"
+  },
+  "newPage": {
+    "message": "Nueva página"
+  },
+  "pageLabel": {
+    "message": "Página"
+  },
+  "domainLabel": {
+    "message": "Dominio"
+  },
+  "replacementsLabel": {
+    "message": "Sustituciones"
+  },
+  "colKey": {
+    "message": "Clave (regex)"
+  },
+  "colValue": {
+    "message": "Valor · $$1, $$2…"
+  },
+  "colFolder": {
+    "message": "Carpeta"
+  },
+  "folderTip": {
+    "message": "Opcional. Si queda vacío, el enlace no lleva carpeta y Claude Desktop abre en su carpeta predeterminada."
+  },
+  "addReplacement": {
+    "message": "+ Sustitución"
+  },
+  "deletePage": {
+    "message": "Eliminar página"
+  },
+  "save": {
+    "message": "Guardar"
+  },
+  "hintSlash": {
+    "message": "Empezar el valor con “/” no funciona: Claude Desktop reemplaza la barra. Pide la skill con texto, p. ej.: “Ejecuta la skill X en Y”."
+  },
+  "phKey": {
+    "message": "/(triaje)\\s+(TASK-\\d+)"
+  },
+  "phValue": {
+    "message": "Ejecuta la skill $$1 en $$2"
+  },
+  "phFolder": {
+    "message": "(carpeta predeterminada)"
+  },
+  "runTitle": {
+    "message": "Ejecutar ahora: aplica esta regla en la pestaña abierta"
+  },
+  "deleteRepTitle": {
+    "message": "Eliminar sustitución"
+  },
+  "countOne": {
+    "message": "1 sustitución"
+  },
+  "countMany": {
+    "message": "{0} sustituciones"
+  },
+  "noPerm": {
+    "message": "sin permiso"
+  },
+  "noPermTitle": {
+    "message": "Abre la página y haz clic en Guardar para permitir la extensión en este sitio."
+  },
+  "regexInvalid": {
+    "message": "Regex no válida: {0}."
+  },
+  "reBackslash": {
+    "message": "barra invertida `\\` sobrante al final"
+  },
+  "reGroupOpen": {
+    "message": "paréntesis `(` abierto sin cerrar"
+  },
+  "reGroupClose": {
+    "message": "paréntesis `)` cerrado sin abrir"
+  },
+  "reClass": {
+    "message": "corchete `[` abierto sin cerrar"
+  },
+  "reNothing": {
+    "message": "`*`, `+`, `?` o `{n}` sin nada antes que repetir"
+  },
+  "reRangeNum": {
+    "message": "rango `{min,max}` con el mínimo mayor que el máximo"
+  },
+  "reRangeChar": {
+    "message": "rango en `[a-z]` con el inicio después del final"
+  },
+  "reGroupInvalid": {
+    "message": "grupo `(?…)` con sintaxis no válida"
+  },
+  "looseQuant": {
+    "message": "Atención: `{0}` no es un cuantificador aquí; busca el texto literal \"{0}\". Usa `{0,{1}}` o `{1,{1}}`."
+  },
+  "fillKey": {
+    "message": "Escribe una clave válida."
+  },
+  "fillValue": {
+    "message": "Escribe el valor."
+  },
+  "openTab": {
+    "message": "Abre una pestaña en `{0}` y haz clic en el icono de la extensión para ejecutarla."
+  },
+  "theDomain": {
+    "message": "el dominio de la página"
+  },
+  "runOne": {
+    "message": "1 coincidencia se convirtió en enlace en esta pestaña."
+  },
+  "runMany": {
+    "message": "{0} coincidencias se convirtieron en enlaces en esta pestaña."
+  },
+  "noMatch": {
+    "message": "La clave no coincide con ningún texto visible de esta pestaña. Revisa la regex."
+  },
+  "allLinked": {
+    "message": "Las {0} coincidencias ya son enlaces."
+  },
+  "splitText": {
+    "message": "La clave coincide {0} vez/veces en el texto, pero el fragmento está dividido entre elementos de la página (p. ej. parte en negrita o un enlace) y no se convirtió en enlace."
+  },
+  "runFailed": {
+    "message": "No se pudo ejecutar en la pestaña: {0}"
+  },
+  "errMissingDomain": {
+    "message": "falta el dominio de la página"
+  },
+  "errMissingKey": {
+    "message": "falta la clave"
+  },
+  "errMissingValue": {
+    "message": "falta el valor"
+  },
+  "errInvalidKey": {
+    "message": "regex no válida en la clave"
+  },
+  "notSaved": {
+    "message": "No se guardó: {0}"
+  },
+  "confirmDelete": {
+    "message": "¿Eliminar {0}?"
+  },
+  "openInClaude": {
+    "message": "Abrir en Claude"
+  }
+}

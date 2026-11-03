@@ -1,95 +1,105 @@
 # Claude Links
 
-Extensão para Chrome/Brave que encontra textos numa página (por regex) e os
-transforma em links que abrem uma **sessão nova na aba Code do Claude Desktop**,
-com a mensagem já digitada.
+**English** · [Português (Brasil)](README.pt-BR.md) · [Português (Portugal)](README.pt-PT.md) · [Español](README.es.md) · [Italiano](README.it.md)
 
-Exemplo: uma automação manda no Discord um aviso com `/triagem TASK-123`.
-Com uma regra cadastrada, esse texto vira um link; um clique abre o Claude
-Desktop com "Rode a skill triagem na TASK-123" no campo de mensagem. A mensagem **não é enviada sozinha**: você confere e
-aperta Enter.
+Chrome/Brave extension that finds text on a page (by regex) and turns it into
+links that open a **new session in the Code tab of Claude Desktop**, with the
+message already typed.
 
-## Como funciona
+Example: an automation posts a Discord message containing `/triage TASK-123`.
+With a rule in place, that text becomes a link; one click opens Claude Desktop
+with "Run the skill triage on TASK-123" in the message box. The message is
+**never sent on its own**: you review it and press Enter.
 
-- O content script roda só nas páginas cadastradas **e autorizadas**: ao salvar
-  uma página no popup, o navegador pede permissão para aquele domínio. Ele
-  acompanha o conteúdo novo (sites como o Discord montam as mensagens
-  dinamicamente).
-- Cada trecho que casa com uma regra vira um link no formato:
+## How it works
+
+- The content script only runs on pages you added **and authorized**: when you
+  save a page in the popup, the browser asks for permission for that domain.
+  It also follows new content (sites like Discord build messages dynamically).
+- Each match of a rule becomes a link in this format:
 
   ```
-  claude://code/new?q=<valor>&folder=<pasta>
+  claude://code/new?q=<value>&folder=<folder>
   ```
 
-  É o deep link oficial do Claude Desktop
-  ([documentação](https://support.claude.com/en/articles/14729294-open-claude-desktop-with-a-link)).
-- Textos dentro de campos de edição, inputs e links existentes não são tocados.
+  This is Claude Desktop's official deep link
+  ([documentation](https://support.claude.com/en/articles/14729294-open-claude-desktop-with-a-link)).
+- Text inside editable fields, inputs and existing links is left untouched.
 
-## Instalação
+## Installation
 
-1. Abra `brave://extensions` (ou `chrome://extensions`).
-2. Ative o **Modo de desenvolvedor**.
-3. Clique em **Carregar sem compactação** e escolha esta pasta.
-4. Fixe o ícone da extensão na barra.
+1. Open `brave://extensions` (or `chrome://extensions`).
+2. Turn on **Developer mode**.
+3. Click **Load unpacked** and pick this folder.
+4. Pin the extension icon to the toolbar.
 
-Depois de alterar os arquivos, clique em recarregar (↻) na extensão e
-recarregue a aba do site.
+After changing files, click reload (↻) on the extension and reload the site's
+tab.
 
-## Configuração
+## Configuration
 
-Clique no ícone da extensão para abrir a lista de páginas.
+Click the extension icon to open the list of pages.
 
-- **+** cadastra uma página nova, já com o domínio da aba atual preenchido.
-- Clicar numa página da lista abre o formulário dela.
+- **+** adds a new page, with the current tab's domain already filled in.
+- Clicking a page in the list opens its form.
 
-Cada página tem uma lista de substituições:
+Each page has a list of replacements:
 
-| Campo | O que é |
-|-------|---------|
-| **Página** | Domínio onde as regras valem (ex.: `discord.com`). Subdomínios também casam. |
-| **Chave** | Regex que identifica o texto a trocar. |
-| **Valor** | Mensagem que vai para o Claude (parâmetro `q`). Aceita `$1`, `$2`… com os grupos da chave. |
-| **Folder** | Opcional. Pasta onde a sessão abre. Vazio = pasta padrão do Claude Desktop. |
+| Field | What it is |
+|-------|------------|
+| **Page** | Domain where the rules apply (e.g. `discord.com`). Subdomains match too. |
+| **Key** | Regex that finds the text to replace. |
+| **Value** | Message sent to Claude (the `q` parameter). Accepts `$1`, `$2`… from the key's groups. |
+| **Folder** | Optional. Folder where the session opens. Empty = Claude Desktop's default folder. |
 
-Exemplo de regra para o Discord:
+Example rule for Discord:
 
-| Chave | Valor | Folder |
-|-------|-------|--------|
-| `/(triagem\|abrir-chamado)\s+([A-Z][A-Z0-9]*-\d+)` | `Rode a skill $1 na $2` | *(vazio)* |
+| Key | Value | Folder |
+|-----|-------|--------|
+| `/(triage\|open-ticket)\s+([A-Z][A-Z0-9]*-\d+)` | `Run the skill $1 on $2` | *(empty)* |
 
-A chave é validada enquanto você digita: regex inválida fica marcada, com o
-erro logo abaixo. O botão **▶** de cada linha aplica aquela regra na hora na aba
-aberta, sem salvar nem recarregar a página, e diz quantos trechos viraram link.
-A aba precisa ser do domínio da página (abra o popup pelo ícone da extensão
-estando nela).
+The key is validated as you type: an invalid regex is highlighted, with the
+error right below it. The **▶** button on each row applies that rule to the
+open tab right away, without saving or reloading, and tells you how many
+matches became links. The tab must be on the page's domain (open the popup
+from the extension icon while on it).
 
-Ao clicar em **Salvar**, o navegador pede permissão para a extensão rodar
-naquele domínio. Página sem permissão aparece marcada como "sem permissão" na
-lista; é só abrir e salvar de novo. Deletar a página devolve a permissão.
+When you click **Save**, the browser asks for permission for the extension to
+run on that domain. Pages without permission are flagged "no permission" in
+the list; just open and save again. Deleting a page gives the permission back.
 
-A configuração fica salva no `chrome.storage.sync` do navegador. Nada é
-coletado nem enviado ([política de privacidade](https://correaschneider.github.io/claude-links-extension/privacy.html)).
+The configuration is stored in the browser's `chrome.storage.sync`. Nothing is
+collected or sent ([privacy policy](https://correaschneider.github.io/claude-links-extension/privacy.html)).
 
-## Limitações
+## Languages
 
-- **Comandos com `/` não funcionam no valor.** O Claude Desktop troca a barra
-  inicial do `q` por outro caractere, então o texto não é reconhecido como
-  comando. Peça a skill em texto ("Rode a skill X na Y").
-- **O Discord não aceita esses links direto na mensagem**: ele só torna
-  clicável o que começa com `http(s)`. Por isso a troca é feita no navegador.
-- O navegador pede confirmação na primeira vez que abre um link `claude://`.
+The extension follows the browser's language: English (default), Portuguese
+(Brazil), Portuguese (Portugal), Spanish and Italian. Texts live in
+`tools/locales.py`; after editing, run `python3 tools/locales.py` to regenerate
+`_locales/`.
 
-## Arquivos
+## Limitations
 
-| Arquivo | Função |
-|---------|--------|
-| `manifest.json` | Manifesto (Manifest V3). |
-| `background.js` | Registra o content script só nos domínios autorizados. |
-| `content.js` | Lê a config e aplica as regras do domínio ao carregar a página. |
-| `linkify.js` | Núcleo da troca de textos por links (usado também pelo ▶). |
-| `link.js` | Monta o link `claude://` . |
-| `defaults.js` | Config inicial (vazia). |
-| `options.html` / `options.js` | Popup com a lista de páginas e o formulário. |
-| `icons/` | Ícone em SVG e PNGs 16/32/48/128. |
-| `store/` | Textos e imagens do anúncio na Chrome Web Store. |
-| `build.sh` | Gera o `.zip` para enviar à loja. |
+- **Commands starting with `/` don't work in the value.** Claude Desktop
+  replaces the leading slash of `q` with another character, so the text is not
+  recognized as a command. Ask for the skill in words ("Run the skill X on Y").
+- **Discord doesn't accept these links in a message**: it only makes
+  `http(s)` links clickable. That's why the replacement happens in the browser.
+- The browser asks for confirmation the first time it opens a `claude://` link.
+
+## Files
+
+| File | Purpose |
+|------|---------|
+| `manifest.json` | Manifest (Manifest V3). |
+| `background.js` | Registers the content script only on authorized domains. |
+| `content.js` | Reads the config and applies the domain's rules on page load. |
+| `linkify.js` | Core text-to-link replacement (also used by ▶). |
+| `link.js` | Builds the `claude://` link. |
+| `defaults.js` | Initial config (empty). |
+| `options.html` / `options.js` | Popup with the page list and the form. |
+| `_locales/` | Translations (generated by `tools/locales.py`). |
+| `icons/` | SVG icon and 16/32/48/128 PNGs. |
+| `store/` | Chrome Web Store listing texts and images. |
+| `build.sh` | Builds the `.zip` to upload to the store. |
+| `docs/` | GitHub Pages site (generated by `docs/build.py`). |

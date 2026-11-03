@@ -1,0 +1,161 @@
+{
+  "extDescription": {
+    "message": "Turns text you choose on any page into links that open a Claude Desktop session with the message ready."
+  },
+  "pagesKicker": {
+    "message": "// pages"
+  },
+  "addPage": {
+    "message": "Add page"
+  },
+  "emptyList": {
+    "message": "No pages yet. Click + to add one."
+  },
+  "back": {
+    "message": "← Back"
+  },
+  "newPage": {
+    "message": "New page"
+  },
+  "pageLabel": {
+    "message": "Page"
+  },
+  "domainLabel": {
+    "message": "Domain"
+  },
+  "replacementsLabel": {
+    "message": "Replacements"
+  },
+  "colKey": {
+    "message": "Key (regex)"
+  },
+  "colValue": {
+    "message": "Value · $$1, $$2…"
+  },
+  "colFolder": {
+    "message": "Folder"
+  },
+  "folderTip": {
+    "message": "Optional. If empty, the link has no folder and Claude Desktop opens in its default folder."
+  },
+  "addReplacement": {
+    "message": "+ Replacement"
+  },
+  "deletePage": {
+    "message": "Delete page"
+  },
+  "save": {
+    "message": "Save"
+  },
+  "hintSlash": {
+    "message": "Starting the value with “/” does not work: Claude Desktop replaces the slash. Ask for the skill in words, e.g. “Run the skill X on Y”."
+  },
+  "phKey": {
+    "message": "/(triage)\\s+(TASK-\\d+)"
+  },
+  "phValue": {
+    "message": "Run the skill $$1 on $$2"
+  },
+  "phFolder": {
+    "message": "(default folder)"
+  },
+  "runTitle": {
+    "message": "Run now: apply this rule to the open tab"
+  },
+  "deleteRepTitle": {
+    "message": "Delete replacement"
+  },
+  "countOne": {
+    "message": "1 replacement"
+  },
+  "countMany": {
+    "message": "{0} replacements"
+  },
+  "noPerm": {
+    "message": "no permission"
+  },
+  "noPermTitle": {
+    "message": "Open the page and click Save to allow the extension on this site."
+  },
+  "regexInvalid": {
+    "message": "Invalid regex: {0}."
+  },
+  "reBackslash": {
+    "message": "stray backslash `\\` at the end"
+  },
+  "reGroupOpen": {
+    "message": "parenthesis `(` opened but not closed"
+  },
+  "reGroupClose": {
+    "message": "parenthesis `)` closed without opening"
+  },
+  "reClass": {
+    "message": "bracket `[` opened but not closed"
+  },
+  "reNothing": {
+    "message": "`*`, `+`, `?` or `{n}` with nothing before it to repeat"
+  },
+  "reRangeNum": {
+    "message": "range `{min,max}` with min greater than max"
+  },
+  "reRangeChar": {
+    "message": "range in `[a-z]` with the start after the end"
+  },
+  "reGroupInvalid": {
+    "message": "group `(?…)` with invalid syntax"
+  },
+  "looseQuant": {
+    "message": "Heads up: `{0}` is not a quantifier here; it looks for the literal text \"{0}\". Use `{0,{1}}` or `{1,{1}}`."
+  },
+  "fillKey": {
+    "message": "Fill in a valid key."
+  },
+  "fillValue": {
+    "message": "Fill in the value."
+  },
+  "openTab": {
+    "message": "Open a tab on `{0}` and click the extension icon to run it."
+  },
+  "theDomain": {
+    "message": "the page domain"
+  },
+  "runOne": {
+    "message": "1 match became a link in this tab."
+  },
+  "runMany": {
+    "message": "{0} matches became links in this tab."
+  },
+  "noMatch": {
+    "message": "The key does not match any visible text in this tab. Check the regex."
+  },
+  "allLinked": {
+    "message": "The {0} matching snippets are already links."
+  },
+  "splitText": {
+    "message": "The key matches {0} time(s) in the text, but the snippet is split across page elements (e.g. part bold or a link) and did not become a link."
+  },
+  "runFailed": {
+    "message": "Could not run in this tab: {0}"
+  },
+  "errMissingDomain": {
+    "message": "the page domain is missing"
+  },
+  "errMissingKey": {
+    "message": "the key is missing"
+  },
+  "errMissingValue": {
+    "message": "the value is missing"
+  },
+  "errInvalidKey": {
+    "message": "invalid regex in the key"
+  },
+  "notSaved": {
+    "message": "Not saved: {0}"
+  },
+  "confirmDelete": {
+    "message": "Delete {0}?"
+  },
+  "openInClaude": {
+    "message": "Open in Claude"
+  }
+}

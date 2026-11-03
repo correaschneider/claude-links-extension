@@ -1,0 +1,161 @@
+{
+  "extDescription": {
+    "message": "Transforma textos de qualquer página em links que abrem uma sessão no Claude Desktop com a mensagem pronta."
+  },
+  "pagesKicker": {
+    "message": "// páginas"
+  },
+  "addPage": {
+    "message": "Adicionar página"
+  },
+  "emptyList": {
+    "message": "Nenhuma página. Clique em + para adicionar."
+  },
+  "back": {
+    "message": "← Voltar"
+  },
+  "newPage": {
+    "message": "Nova página"
+  },
+  "pageLabel": {
+    "message": "Página"
+  },
+  "domainLabel": {
+    "message": "Domínio"
+  },
+  "replacementsLabel": {
+    "message": "Substituições"
+  },
+  "colKey": {
+    "message": "Chave (regex)"
+  },
+  "colValue": {
+    "message": "Valor · $$1, $$2…"
+  },
+  "colFolder": {
+    "message": "Pasta"
+  },
+  "folderTip": {
+    "message": "Opcional. Se ficar vazio, o link não leva pasta e o Claude Desktop abre na pasta padrão."
+  },
+  "addReplacement": {
+    "message": "+ Substituição"
+  },
+  "deletePage": {
+    "message": "Deletar página"
+  },
+  "save": {
+    "message": "Salvar"
+  },
+  "hintSlash": {
+    "message": "Começar o valor com “/” não funciona: o Claude Desktop troca a barra. Peça a skill em texto, ex.: “Rode a skill X na Y”."
+  },
+  "phKey": {
+    "message": "/(triagem)\\s+(TASK-\\d+)"
+  },
+  "phValue": {
+    "message": "Rode a skill $$1 na $$2"
+  },
+  "phFolder": {
+    "message": "(pasta padrão)"
+  },
+  "runTitle": {
+    "message": "Executar agora: aplica esta regra na aba aberta"
+  },
+  "deleteRepTitle": {
+    "message": "Deletar substituição"
+  },
+  "countOne": {
+    "message": "1 substituição"
+  },
+  "countMany": {
+    "message": "{0} substituições"
+  },
+  "noPerm": {
+    "message": "sem permissão"
+  },
+  "noPermTitle": {
+    "message": "Abra a página e clique em Salvar para permitir a extensão neste site."
+  },
+  "regexInvalid": {
+    "message": "Regex inválida: {0}."
+  },
+  "reBackslash": {
+    "message": "barra invertida `\\` sobrando no fim"
+  },
+  "reGroupOpen": {
+    "message": "parêntese `(` aberto sem fechar"
+  },
+  "reGroupClose": {
+    "message": "parêntese `)` fechando sem abrir"
+  },
+  "reClass": {
+    "message": "colchete `[` aberto sem fechar"
+  },
+  "reNothing": {
+    "message": "`*`, `+`, `?` ou `{n}` sem nada antes para repetir"
+  },
+  "reRangeNum": {
+    "message": "intervalo `{min,max}` com o mínimo maior que o máximo"
+  },
+  "reRangeChar": {
+    "message": "intervalo em `[a-z]` com o início depois do fim"
+  },
+  "reGroupInvalid": {
+    "message": "grupo `(?…)` com sintaxe inválida"
+  },
+  "looseQuant": {
+    "message": "Atenção: `{0}` não é quantificador aqui, procura o texto \"{0}\". Use `{0,{1}}` ou `{1,{1}}`."
+  },
+  "fillKey": {
+    "message": "Preencha uma chave válida."
+  },
+  "fillValue": {
+    "message": "Preencha o valor."
+  },
+  "openTab": {
+    "message": "Abra uma aba em `{0}` e clique no ícone da extensão para executar."
+  },
+  "theDomain": {
+    "message": "o domínio da página"
+  },
+  "runOne": {
+    "message": "1 trecho virou link nesta aba."
+  },
+  "runMany": {
+    "message": "{0} trechos viraram link nesta aba."
+  },
+  "noMatch": {
+    "message": "A chave não casa com nenhum texto visível desta aba. Confira a regex."
+  },
+  "allLinked": {
+    "message": "Os {0} trechos que casam já são links."
+  },
+  "splitText": {
+    "message": "A chave casa {0} vez(es) no texto, mas o trecho está dividido entre elementos da página (ex.: parte em negrito ou link) e não virou link."
+  },
+  "runFailed": {
+    "message": "Não consegui executar na aba: {0}"
+  },
+  "errMissingDomain": {
+    "message": "falta o domínio da página"
+  },
+  "errMissingKey": {
+    "message": "falta a chave"
+  },
+  "errMissingValue": {
+    "message": "falta o valor"
+  },
+  "errInvalidKey": {
+    "message": "regex inválida na chave"
+  },
+  "notSaved": {
+    "message": "Não salvei: {0}"
+  },
+  "confirmDelete": {
+    "message": "Deletar {0}?"
+  },
+  "openInClaude": {
+    "message": "Abrir no Claude"
+  }
+}

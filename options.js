@@ -1,6 +1,19 @@
 const $ = (id) => document.getElementById(id);
 const tplRep = $('tpl-rep');
 
+// Texto traduzido (_locales); {0}, {1}… recebem os argumentos.
+function t(key, ...args) {
+  const text = chrome.i18n.getMessage(key) || key;
+  return text.replace(/\{(\d)\}/g, (_, i) => args[i] ?? '');
+}
+
+// Traduz o HTML: data-i18n (texto), data-i18n-title, data-i18n-placeholder.
+function translate(root) {
+  root.querySelectorAll('[data-i18n]').forEach((el) => { el.textContent = t(el.dataset.i18n); });
+  root.querySelectorAll('[data-i18n-title]').forEach((el) => { el.title = t(el.dataset.i18nTitle); });
+  root.querySelectorAll('[data-i18n-placeholder]').forEach((el) => { el.placeholder = t(el.dataset.i18nPlaceholder); });
+}
+
 let config = [];
 let editing = -1; // índice da página no formulário; -1 = nova
 
@@ -40,14 +53,14 @@ function renderList() {
     const count = document.createElement('span');
     count.className = 'count';
     const n = (p.replacements || []).length;
-    count.textContent = `${n} substituiç${n === 1 ? 'ão' : 'ões'}`;
+    count.textContent = n === 1 ? t('countOne') : t('countMany', n);
     li.append(host, count);
     granted(p.page).then((ok) => {
       if (ok) return;
       const warn = document.createElement('span');
       warn.className = 'no-perm';
-      warn.textContent = 'sem permissão';
-      warn.title = 'Abra a página e clique em Salvar para permitir a extensão neste site.';
+      warn.textContent = t('noPerm');
+      warn.title = t('noPermTitle');
       host.after(warn);
     });
     li.addEventListener('click', () => openForm(i));
@@ -79,22 +92,22 @@ function rowMessage(row, text, isError) {
 }
 
 // O erro nativo repete a regex entre barras (/…/) e fica confuso; fica só o
-// motivo, em português quando é um dos casos comuns.
+// motivo, traduzido quando é um dos casos comuns.
 const REGEX_ERRORS = [
-  [/\\ at end of pattern/, 'barra invertida `\\` sobrando no fim'],
-  [/Unterminated group/, 'parêntese `(` aberto sem fechar'],
-  [/Unmatched '\)'/, 'parêntese `)` fechando sem abrir'],
-  [/Unterminated character class/, 'colchete `[` aberto sem fechar'],
-  [/Nothing to repeat/, '`*`, `+`, `?` ou `{n}` sem nada antes para repetir'],
-  [/numbers out of order/, 'intervalo `{min,max}` com o mínimo maior que o máximo'],
-  [/Range out of order/, 'intervalo em `[a-z]` com o início depois do fim'],
-  [/Invalid group/, 'grupo `(?…)` com sintaxe inválida'],
+  [/\\ at end of pattern/, 'reBackslash'],
+  [/Unterminated group/, 'reGroupOpen'],
+  [/Unmatched '\)'/, 'reGroupClose'],
+  [/Unterminated character class/, 'reClass'],
+  [/Nothing to repeat/, 'reNothing'],
+  [/numbers out of order/, 'reRangeNum'],
+  [/Range out of order/, 'reRangeChar'],
+  [/Invalid group/, 'reGroupInvalid'],
 ];
 
 function regexError(e) {
   const reason = e.message.replace(/^Invalid regular expression: \/.*\/[a-z]*: /, '');
   const known = REGEX_ERRORS.find(([pattern]) => pattern.test(reason));
-  return `Regex inválida: ${known ? known[1] : reason}.`;
+  return t('regexInvalid', known ? t(known[1]) : reason);
 }
 
 // Valida a chave enquanto digita; devolve o RegExp ou null.
@@ -113,7 +126,7 @@ function checkMatch(row) {
     // `{,n}` é válido mas não repete nada: casa o texto "{,n}" literal.
     const loose = value.match(/(?<!\\)\{,(\d+)\}/);
     rowMessage(row, loose
-      ? `Atenção: \`${loose[0]}\` não é quantificador aqui, procura o texto "${loose[0]}". Use \`{0,${loose[1]}}\` ou \`{1,${loose[1]}}\`.`
+      ? t('looseQuant', loose[0], loose[1])
       : '', false);
   }
   return re;
@@ -126,8 +139,8 @@ async function runOnPage(row) {
     q: row.querySelector('.q').value.trim(),
     folder: row.querySelector('.folder').value.trim(),
   };
-  if (!rule.match || !checkMatch(row)) return rowMessage(row, 'Preencha uma chave válida.', true);
-  if (!rule.q) return rowMessage(row, 'Preencha o valor.', true);
+  if (!rule.match || !checkMatch(row)) return rowMessage(row, t('fillKey'), true);
+  if (!rule.q) return rowMessage(row, t('fillValue'), true);
   if (!rule.folder) delete rule.folder;
 
   const page = $('host').value.trim();
@@ -140,7 +153,7 @@ async function runOnPage(row) {
   let host = '';
   try { host = new URL(tab.url).hostname; } catch { /* aba sem URL legível */ }
   if (!host || !(host === page || host.endsWith(`.${page}`))) {
-    return rowMessage(row, `Abra uma aba em \`${page || "o domínio da página"}\` e clique no ícone da extensão para executar.`, true);
+    return rowMessage(row, t('openTab', page || t('theDomain')), true);
   }
 
   try {
@@ -160,18 +173,19 @@ async function runOnPage(row) {
     });
     const { created, inText, linked } = result;
     let text;
-    if (created) text = `${created} ${created === 1 ? 'trecho virou' : 'trechos viraram'} link nesta aba.`;
-    else if (!inText) text = 'A chave não casa com nenhum texto visível desta aba. Confira a regex.';
-    else if (linked >= inText) text = `Os ${inText} trechos que casam já são links.`;
-    else text = `A chave casa ${inText} vez(es) no texto, mas o trecho está dividido entre elementos da página (ex.: parte em negrito ou link) e não virou link.`;
+    if (created) text = created === 1 ? t('runOne') : t('runMany', created);
+    else if (!inText) text = t('noMatch');
+    else if (linked >= inText) text = t('allLinked', inText);
+    else text = t('splitText', inText);
     rowMessage(row, text, !created && !inText);
   } catch (e) {
-    rowMessage(row, `Não consegui executar na aba: ${e.message}`, true);
+    rowMessage(row, t('runFailed', e.message), true);
   }
 }
 
 function addRep(r = {}) {
   const row = tplRep.content.firstElementChild.cloneNode(true);
+  translate(row);
   row.querySelector('.match').value = r.match || '';
   row.querySelector('.q').value = r.q || '';
   row.querySelector('.folder').value = r.folder || '';
@@ -185,7 +199,7 @@ function addRep(r = {}) {
 function openForm(index, host = '') {
   editing = index;
   const p = index >= 0 ? config[index] : { page: host, replacements: [] };
-  $('form-title').textContent = index >= 0 ? p.page : 'Nova página';
+  $('form-title').textContent = index >= 0 ? p.page : t('newPage');
   $('host').value = p.page;
   $('reps').replaceChildren();
   (p.replacements.length ? p.replacements : [{}]).forEach(addRep);
@@ -202,7 +216,7 @@ function collect() {
   const fail = (input, msg) => { input.classList.add('invalid'); input.focus(); throw new Error(msg); };
 
   const page = $('host').value.trim();
-  if (!page) fail($('host'), 'falta o domínio da página');
+  if (!page) fail($('host'), t('errMissingDomain'));
 
   const replacements = [...$('reps').querySelectorAll('.rep')].flatMap((row) => {
     const [mEl, qEl, fEl] = ['.match', '.q', '.folder'].map((s) => row.querySelector(s));
@@ -210,9 +224,9 @@ function collect() {
     const q = qEl.value.trim();
     const folder = fEl.value.trim();
     if (!match && !q && !folder) return []; // linha vazia é ignorada
-    if (!match) fail(mEl, 'falta a chave');
-    if (!q) fail(qEl, 'falta o valor');
-    if (!checkMatch(row)) fail(mEl, 'regex inválida na chave');
+    if (!match) fail(mEl, t('errMissingKey'));
+    if (!q) fail(qEl, t('errMissingValue'));
+    if (!checkMatch(row)) fail(mEl, t('errInvalidKey'));
     return [folder ? { match, q, folder } : { match, q }];
   });
   return { page, replacements };
@@ -240,7 +254,7 @@ $('save').addEventListener('click', () => {
   try {
     page = collect();
   } catch (e) {
-    return show(`Não salvei: ${e.message}`, false);
+    return show(t('notSaved', e.message), false);
   }
   // O pedido de permissão precisa sair no clique, antes de qualquer await.
   // Não esperamos a resposta para salvar: em alguns sistemas o popup fecha
@@ -261,11 +275,14 @@ function releaseIfUnused(host) {
 }
 
 $('del-page').addEventListener('click', () => {
-  if (editing < 0 || !confirm(`Deletar ${config[editing].page}?`)) return;
+  if (editing < 0 || !confirm(t('confirmDelete', config[editing].page))) return;
   const [removed] = config.splice(editing, 1);
   releaseIfUnused(removed.page);
   persist(showList);
 });
+
+translate(document);
+document.documentElement.lang = chrome.i18n.getUILanguage();
 
 chrome.storage.sync.get({ config: DEFAULT_CONFIG }, (data) => {
   config = data.config;

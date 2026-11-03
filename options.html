@@ -1,6 +1,6 @@
 <!doctype html>
 <meta charset="utf-8">
-<title>Claude Links — config</title>
+<title>Claude Links</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -91,63 +91,63 @@
 <section id="view-list">
   <header class="appbar">
     <h1>Claude Links</h1>
-    <span class="kicker">// páginas</span>
-    <button id="add-page" class="fab" title="Add page">+</button>
+    <span class="kicker" data-i18n="pagesKicker"></span>
+    <button id="add-page" class="fab" data-i18n-title="addPage">+</button>
   </header>
   <main>
     <ul id="list" class="list"></ul>
-    <p id="empty" class="empty" hidden>Nenhuma página. Clique em + para adicionar.</p>
+    <p id="empty" class="empty" data-i18n="emptyList" hidden></p>
   </main>
 </section>
 
 <!-- Formulário de uma página -->
 <section id="view-form" hidden>
   <header class="appbar">
-    <button id="back" class="btn-text" title="Voltar">← Voltar</button>
-    <h1 id="form-title">Página</h1>
+    <button id="back" class="btn-text" data-i18n="back"></button>
+    <h1 id="form-title"></h1>
   </header>
   <main>
     <div class="paper">
-      <p class="label">Página</p>
+      <p class="label" data-i18n="pageLabel"></p>
       <div class="rule-line"></div>
       <div class="field">
-        <label for="host">Domínio</label>
+        <label for="host" data-i18n="domainLabel"></label>
         <input id="host" placeholder="discord.com">
       </div>
     </div>
 
     <div class="paper">
-      <p class="label">Substituições</p>
+      <p class="label" data-i18n="replacementsLabel"></p>
       <div class="rule-line"></div>
       <div class="row labels">
-        <span>Chave (regex)</span>
-        <span>Valor · $1, $2…</span>
-        <span>Folder <span class="tip" title="Opcional. Se ficar vazio, o link não leva folder e o Claude Desktop abre na pasta padrão.">(?)</span></span>
+        <span data-i18n="colKey"></span>
+        <span data-i18n="colValue"></span>
+        <span><span data-i18n="colFolder"></span> <span class="tip" data-i18n-title="folderTip">(?)</span></span>
         <span></span>
         <span></span>
       </div>
       <div id="reps"></div>
-      <button id="add-rep" class="btn-text">+ Substituição</button>
+      <button id="add-rep" class="btn-text" data-i18n="addReplacement"></button>
     </div>
 
     <div class="bar paper">
-      <button id="del-page" class="btn-outlined">Deletar página</button>
+      <button id="del-page" class="btn-outlined" data-i18n="deletePage"></button>
       <span class="spacer"></span>
       <span id="status"></span>
-      <button id="save" class="btn-contained">Salvar</button>
+      <button id="save" class="btn-contained" data-i18n="save"></button>
     </div>
 
-    <p class="hint"><b>/</b><span>Começar o valor com “/” não funciona: o Claude Desktop troca a barra. Peça a skill em texto, ex.: “Rode a skill X na Y”.</span></p>
+    <p class="hint"><b>/</b><span data-i18n="hintSlash"></span></p>
   </main>
 </section>
 
 <template id="tpl-rep">
   <div class="row rep">
-    <input class="match" placeholder="/(triagem)\s+(TASK-\d+)">
-    <input class="q" placeholder="Rode a skill $1 na $2">
-    <input class="folder" placeholder="(pasta padrão)">
-    <button class="icon-btn run-rep" title="Executar agora: aplica esta regra na aba aberta">▶</button>
-    <button class="icon-btn del-rep" title="Deletar substituição">✕</button>
+    <input class="match" data-i18n-placeholder="phKey">
+    <input class="q" data-i18n-placeholder="phValue">
+    <input class="folder" data-i18n-placeholder="phFolder">
+    <button class="icon-btn run-rep" data-i18n-title="runTitle">▶</button>
+    <button class="icon-btn del-rep" data-i18n-title="deleteRepTitle">✕</button>
     <p class="row-msg" hidden></p>
   </div>
 </template>

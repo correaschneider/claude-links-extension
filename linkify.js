@@ -25,7 +25,7 @@ globalThis.ClaudeLinks ??= (() => {
     const a = document.createElement('a');
     a.href = href;
     a.textContent = text;
-    a.title = 'Abrir no Claude';
+    a.title = chrome.i18n.getMessage('openInClaude');
     a.setAttribute(MARK, '');
     a.style.cssText = 'color:#00a8fc;text-decoration:underline;cursor:pointer';
     // Sites como o Discord interceptam cliques em links; abre o esquema direto.

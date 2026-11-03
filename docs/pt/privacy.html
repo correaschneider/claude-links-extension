@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Links · Política de privacidade</title>
+<meta name="description" content="Extensão para Chrome/Brave que transforma textos de uma página em ligações que abrem uma sessão no Claude Desktop com a mensagem pronta.">
+<link rel="alternate" hreflang="en" href="https://correaschneider.github.io/claude-links-extension/privacy.html">
+<link rel="alternate" hreflang="pt-BR" href="https://correaschneider.github.io/claude-links-extension/pt-br/privacy.html">
+<link rel="alternate" hreflang="pt-PT" href="https://correaschneider.github.io/claude-links-extension/pt/privacy.html">
+<link rel="alternate" hreflang="es" href="https://correaschneider.github.io/claude-links-extension/es/privacy.html">
+<link rel="alternate" hreflang="it" href="https://correaschneider.github.io/claude-links-extension/it/privacy.html">
+<link rel="alternate" hreflang="x-default" href="https://correaschneider.github.io/claude-links-extension/privacy.html">
+<link rel="icon" type="image/svg+xml" href="../icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,600;0,700;1,500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<header class="appbar">
+  <div class="inner">
+    <a class="brand" href="./"><img src="../icon.svg" alt="" width="28" height="28" style="vertical-align:middle;margin-right:10px;border-radius:5px">Claude Links</a>
+    <nav>
+      <a href="./#how">Como funciona</a>
+      <a href="./#install">Instalação</a>
+      <a href="./#config">Configuração</a>
+      <a href="https://github.com/correaschneider/claude-links-extension">GitHub</a>
+    </nav>
+    <details class="lang">
+      <summary aria-label="Language">Português (Portugal) ▾</summary>
+      <ul><li><a href="../privacy.html" hreflang="en">English</a></li><li><a href="../pt-br/privacy.html" hreflang="pt-BR">Português (Brasil)</a></li><li><a href="../pt/privacy.html" hreflang="pt-PT" aria-current="page">Português (Portugal)</a></li><li><a href="../es/privacy.html" hreflang="es">Español</a></li><li><a href="../it/privacy.html" hreflang="it">Italiano</a></li></ul>
+    </details>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="container">
+    <p class="kicker">// privacy</p>
+    <h1>Política de privacidade</h1>
+    <p class="lead">A Claude Links não recolhe, não envia e não vende quaisquer dados. Tudo o que utiliza fica no seu navegador.</p>
+  </div>
+</div>
+<main>
+  <section>
+    <div class="container">
+      <div class="paper">
+        <p class="label">O que a extensão guarda</p>
+        <div class="rule-line rule-after"></div>
+        <p>Apenas a configuração que introduz no popup: os domínios das páginas e as regras (chave, valor e pasta). Fica no <code>chrome.storage.sync</code> do navegador, que o próprio navegador pode sincronizar entre os seus dispositivos quando tem sessão iniciada. A extensão não tem servidor e não envia esta configuração para lado nenhum.</p>
+      </div>
+      <div class="paper" style="margin-top:20px">
+        <p class="label">O que lê nas páginas</p>
+        <div class="rule-line rule-after"></div>
+        <p>Corre apenas nos domínios que adicionou e autorizou. Nessas páginas, procura no texto visível os trechos que correspondem às suas regras e transforma-os em ligações. O texto da página não é guardado nem enviado.</p>
+      </div>
+      <div class="paper" style="margin-top:20px">
+        <p class="label">Quando clica numa ligação</p>
+        <div class="rule-line rule-after"></div>
+        <p>A ligação <code>claude://</code> é entregue ao sistema operativo, que abre o Claude Desktop instalado no seu computador com a mensagem preenchida. A partir daí aplica-se a política de privacidade do Claude. A extensão não participa nessa conversa.</p>
+      </div>
+      <div class="paper" style="margin-top:20px">
+        <p class="label">Permissões</p>
+        <div class="rule-line rule-after"></div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Permissão</th><th>Para quê</th></tr></thead>
+          <tbody>
+            <tr><td>storage</td><td>Guardar a sua configuração.</td></tr>
+            <tr><td>activeTab</td><td>Preencher o domínio do separador atual quando clica em + no popup.</td></tr>
+            <tr><td>scripting</td><td>Ativar a substituição de textos apenas nos domínios adicionados e executar uma regra de imediato com o ▶.</td></tr>
+            <tr><td>Acesso a sites (opcional)</td><td>Pedido um a um, quando guarda uma página. Sem a sua autorização, a extensão não corre no site.</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="paper" style="margin-top:20px">
+        <p class="label">Contacto</p>
+        <div class="rule-line rule-after"></div>
+        <p>Dúvidas ou problemas: abra uma issue em <a href="https://github.com/correaschneider/claude-links-extension/issues">github.com/correaschneider/claude-links-extension</a>.</p>
+        <p class="label" style="margin-top:16px">Atualizada a 3 de novembro de 2026</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <span class="stack"><a href="privacy.html">Política de privacidade</a> · Manifest V3 · JavaScript · chrome.storage · claude:// deep links</span>
+    <a href="https://github.com/correaschneider/claude-links-extension">correaschneider/claude-links-extension</a>
+  </div>
+</footer>
+
+</body>
+</html>

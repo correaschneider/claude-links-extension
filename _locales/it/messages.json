@@ -1,0 +1,161 @@
+{
+  "extDescription": {
+    "message": "Trasforma i testi di qualsiasi pagina in link che aprono una sessione di Claude Desktop con il messaggio pronto."
+  },
+  "pagesKicker": {
+    "message": "// pagine"
+  },
+  "addPage": {
+    "message": "Aggiungi pagina"
+  },
+  "emptyList": {
+    "message": "Nessuna pagina. Clicca su + per aggiungerne una."
+  },
+  "back": {
+    "message": "← Indietro"
+  },
+  "newPage": {
+    "message": "Nuova pagina"
+  },
+  "pageLabel": {
+    "message": "Pagina"
+  },
+  "domainLabel": {
+    "message": "Dominio"
+  },
+  "replacementsLabel": {
+    "message": "Sostituzioni"
+  },
+  "colKey": {
+    "message": "Chiave (regex)"
+  },
+  "colValue": {
+    "message": "Valore · $$1, $$2…"
+  },
+  "colFolder": {
+    "message": "Cartella"
+  },
+  "folderTip": {
+    "message": "Facoltativo. Se vuoto, il link non include una cartella e Claude Desktop si apre in quella predefinita."
+  },
+  "addReplacement": {
+    "message": "+ Sostituzione"
+  },
+  "deletePage": {
+    "message": "Elimina pagina"
+  },
+  "save": {
+    "message": "Salva"
+  },
+  "hintSlash": {
+    "message": "Iniziare il valore con “/” non funziona: Claude Desktop sostituisce la barra. Chiedi la skill a parole, ad es.: “Esegui la skill X su Y”."
+  },
+  "phKey": {
+    "message": "/(triage)\\s+(TASK-\\d+)"
+  },
+  "phValue": {
+    "message": "Esegui la skill $$1 su $$2"
+  },
+  "phFolder": {
+    "message": "(cartella predefinita)"
+  },
+  "runTitle": {
+    "message": "Esegui ora: applica questa regola alla scheda aperta"
+  },
+  "deleteRepTitle": {
+    "message": "Elimina sostituzione"
+  },
+  "countOne": {
+    "message": "1 sostituzione"
+  },
+  "countMany": {
+    "message": "{0} sostituzioni"
+  },
+  "noPerm": {
+    "message": "senza permesso"
+  },
+  "noPermTitle": {
+    "message": "Apri la pagina e clicca su Salva per consentire l’estensione su questo sito."
+  },
+  "regexInvalid": {
+    "message": "Regex non valida: {0}."
+  },
+  "reBackslash": {
+    "message": "barra rovesciata `\\` in più alla fine"
+  },
+  "reGroupOpen": {
+    "message": "parentesi `(` aperta e non chiusa"
+  },
+  "reGroupClose": {
+    "message": "parentesi `)` chiusa senza essere aperta"
+  },
+  "reClass": {
+    "message": "parentesi quadra `[` aperta e non chiusa"
+  },
+  "reNothing": {
+    "message": "`*`, `+`, `?` o `{n}` senza nulla prima da ripetere"
+  },
+  "reRangeNum": {
+    "message": "intervallo `{min,max}` con il minimo maggiore del massimo"
+  },
+  "reRangeChar": {
+    "message": "intervallo in `[a-z]` con l’inizio dopo la fine"
+  },
+  "reGroupInvalid": {
+    "message": "gruppo `(?…)` con sintassi non valida"
+  },
+  "looseQuant": {
+    "message": "Attenzione: `{0}` qui non è un quantificatore; cerca il testo letterale \"{0}\". Usa `{0,{1}}` o `{1,{1}}`."
+  },
+  "fillKey": {
+    "message": "Inserisci una chiave valida."
+  },
+  "fillValue": {
+    "message": "Inserisci il valore."
+  },
+  "openTab": {
+    "message": "Apri una scheda su `{0}` e clicca sull’icona dell’estensione per eseguirla."
+  },
+  "theDomain": {
+    "message": "il dominio della pagina"
+  },
+  "runOne": {
+    "message": "1 corrispondenza è diventata un link in questa scheda."
+  },
+  "runMany": {
+    "message": "{0} corrispondenze sono diventate link in questa scheda."
+  },
+  "noMatch": {
+    "message": "La chiave non corrisponde a nessun testo visibile in questa scheda. Controlla la regex."
+  },
+  "allLinked": {
+    "message": "Le {0} corrispondenze sono già link."
+  },
+  "splitText": {
+    "message": "La chiave corrisponde {0} volta/e nel testo, ma il frammento è diviso tra elementi della pagina (ad es. parte in grassetto o un link) e non è diventato un link."
+  },
+  "runFailed": {
+    "message": "Impossibile eseguire nella scheda: {0}"
+  },
+  "errMissingDomain": {
+    "message": "manca il dominio della pagina"
+  },
+  "errMissingKey": {
+    "message": "manca la chiave"
+  },
+  "errMissingValue": {
+    "message": "manca il valore"
+  },
+  "errInvalidKey": {
+    "message": "regex non valida nella chiave"
+  },
+  "notSaved": {
+    "message": "Non salvato: {0}"
+  },
+  "confirmDelete": {
+    "message": "Eliminare {0}?"
+  },
+  "openInClaude": {
+    "message": "Apri in Claude"
+  }
+}
