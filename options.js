@@ -148,12 +148,23 @@ async function runOnPage(row) {
     await chrome.scripting.executeScript({ target, files: ['link.js', 'linkify.js'] });
     const [{ result }] = await chrome.scripting.executeScript({
       target,
-      func: (r) => globalThis.ClaudeLinks.run([r]),
+      // Além de aplicar, conta quantas vezes a chave casa no texto visível,
+      // para explicar quando nada vira link.
+      func: (r) => {
+        const created = globalThis.ClaudeLinks.run([r]);
+        const inText = (document.body.innerText.match(new RegExp(r.match, 'g')) || []).length;
+        const linked = document.querySelectorAll('[data-claude-link]').length;
+        return { created, inText, linked };
+      },
       args: [rule],
     });
-    rowMessage(row, result
-      ? `${result} ${result === 1 ? 'trecho virou' : 'trechos viraram'} link nesta aba.`
-      : 'Nenhum trecho novo para trocar nesta aba.', false);
+    const { created, inText, linked } = result;
+    let text;
+    if (created) text = `${created} ${created === 1 ? 'trecho virou' : 'trechos viraram'} link nesta aba.`;
+    else if (!inText) text = 'A chave não casa com nenhum texto visível desta aba. Confira a regex.';
+    else if (linked >= inText) text = `Os ${inText} trechos que casam já são links.`;
+    else text = `A chave casa ${inText} vez(es) no texto, mas o trecho está dividido entre elementos da página (ex.: parte em negrito ou link) e não virou link.`;
+    rowMessage(row, text, !created && !inText);
   } catch (e) {
     rowMessage(row, `Não consegui executar na aba: ${e.message}`, true);
   }
