@@ -29,6 +29,12 @@ Il messaggio **non viene mai inviato da solo**: lo controlli e premi Invio.
 
 ## Installazione
 
+**Chrome Web Store (consigliato):** [aggiungi Claude Links](https://chromewebstore.google.com/detail/claude-links/lphafilnbkkfemcmibdbigaopjnbdell) e fissa
+l'icona nella barra. Funziona su Chrome, Brave e altri browser Chromium, con
+aggiornamenti automatici.
+
+**Dal codice sorgente:**
+
 1. Apri `brave://extensions` (o `chrome://extensions`).
 2. Attiva la **Modalità sviluppatore**.
 3. Clicca su **Carica estensione non pacchettizzata** e scegli questa cartella.

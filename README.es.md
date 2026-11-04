@@ -29,6 +29,12 @@ mensaje **nunca se envía solo**: lo revisas y pulsas Enter.
 
 ## Instalación
 
+**Chrome Web Store (recomendado):** [añade Claude Links](https://chromewebstore.google.com/detail/claude-links/lphafilnbkkfemcmibdbigaopjnbdell) y fija el
+icono en la barra. Funciona en Chrome, Brave y otros navegadores Chromium, con
+actualizaciones automáticas.
+
+**Desde el código fuente:**
+
 1. Abre `brave://extensions` (o `chrome://extensions`).
 2. Activa el **Modo de desarrollador**.
 3. Haz clic en **Cargar descomprimida** y elige esta carpeta.

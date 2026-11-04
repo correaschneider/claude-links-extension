@@ -12,6 +12,7 @@ from pathlib import Path
 
 DOCS = Path(__file__).resolve().parent
 REPO = 'https://github.com/correaschneider/claude-links-extension'
+STORE = 'https://chromewebstore.google.com/detail/claude-links/lphafilnbkkfemcmibdbigaopjnbdell'
 SITE = 'https://correaschneider.github.io/claude-links-extension/'
 
 # código -> (pasta, nome no seletor, atributo lang)
@@ -40,9 +41,10 @@ T = {
         's1_t': 'Finds', 's1_p': 'The script runs on the pages you added and follows new content as it arrives, like new Discord messages.',
         's2_t': 'Replaces', 's2_p': 'Each match of a rule becomes a <code>claude://code/new</code> link, built from the rule’s value and folder.',
         's3_t': 'Opens', 's3_p': 'The click opens a Claude Desktop session with the message typed. Nothing is sent on its own: you review it and press Enter.',
-        'inst_kicker': '// installation', 'inst_title': 'Load it in the browser',
-        'inst_sub': 'Until it is on the Chrome Web Store, the extension is loaded from the source code.',
-        'steps_label': 'Step by step',
+        'inst_kicker': '// installation', 'inst_title': 'Install it',
+        'inst_sub': 'Install from the Chrome Web Store (works in Chrome, Brave and other Chromium browsers), or load it from the source code.',
+        'store_label': 'Chrome Web Store · recommended', 'store_text': 'One click, with automatic updates. Then pin the extension icon to the toolbar.', 'store_btn': 'Add from the Chrome Web Store',
+        'steps_label': 'From the source code',
         'inst_steps': ['Download or clone the <a href="{repo}">repository</a>.', 'Open <code>brave://extensions</code> or <code>chrome://extensions</code>.', 'Turn on <strong>Developer mode</strong>.', 'Click <strong>Load unpacked</strong> and pick the folder.', 'Pin the extension icon to the toolbar.'],
         'term_label': 'From the terminal', 'term_clone': '# clone the code', 'term_after': '# after changing files:', 'term_reload': '# ↻ on the extension + reload the tab',
         'cfg_kicker': '// configuration', 'cfg_title': 'Rules per page',
@@ -97,9 +99,10 @@ T = {
         's1_t': 'Encontra', 's1_p': 'O script roda nas páginas cadastradas e acompanha o conteúdo que vai chegando, como as mensagens novas do Discord.',
         's2_t': 'Troca', 's2_p': 'Cada trecho que casa com uma regra vira um link <code>claude://code/new</code>, montado com o valor e a pasta da regra.',
         's3_t': 'Abre', 's3_p': 'O clique abre uma sessão no Claude Desktop com a mensagem digitada. Nada é enviado sozinho: você confere e aperta Enter.',
-        'inst_kicker': '// instalação', 'inst_title': 'Carregar no navegador',
-        'inst_sub': 'Enquanto não está na Chrome Web Store, a extensão é carregada a partir do código.',
-        'steps_label': 'Passo a passo',
+        'inst_kicker': '// instalação', 'inst_title': 'Instalar',
+        'inst_sub': 'Instale pela Chrome Web Store (funciona no Chrome, no Brave e em outros navegadores Chromium) ou carregue a partir do código.',
+        'store_label': 'Chrome Web Store · recomendado', 'store_text': 'Um clique, com atualização automática. Depois, fixe o ícone da extensão na barra.', 'store_btn': 'Adicionar pela Chrome Web Store',
+        'steps_label': 'A partir do código',
         'inst_steps': ['Baixe ou clone o <a href="{repo}">repositório</a>.', 'Abra <code>brave://extensions</code> ou <code>chrome://extensions</code>.', 'Ative o <strong>Modo de desenvolvedor</strong>.', 'Clique em <strong>Carregar sem compactação</strong> e escolha a pasta.', 'Fixe o ícone da extensão na barra.'],
         'term_label': 'Via terminal', 'term_clone': '# clona o código', 'term_after': '# depois de mudar arquivos:', 'term_reload': '# ↻ na extensão + recarregar a aba',
         'cfg_kicker': '// configuração', 'cfg_title': 'Regras por página',
@@ -154,9 +157,10 @@ T = {
         's1_t': 'Encontra', 's1_p': 'O script corre nas páginas adicionadas e acompanha o conteúdo que vai chegando, como as mensagens novas do Discord.',
         's2_t': 'Substitui', 's2_p': 'Cada trecho que corresponde a uma regra passa a ser uma ligação <code>claude://code/new</code>, construída com o valor e a pasta da regra.',
         's3_t': 'Abre', 's3_p': 'O clique abre uma sessão no Claude Desktop com a mensagem escrita. Nada é enviado sozinho: verifica-a e prime Enter.',
-        'inst_kicker': '// instalação', 'inst_title': 'Carregar no navegador',
-        'inst_sub': 'Enquanto não está na Chrome Web Store, a extensão é carregada a partir do código.',
-        'steps_label': 'Passo a passo',
+        'inst_kicker': '// instalação', 'inst_title': 'Instalar',
+        'inst_sub': 'Instale pela Chrome Web Store (funciona no Chrome, no Brave e noutros navegadores Chromium) ou carregue a partir do código.',
+        'store_label': 'Chrome Web Store · recomendado', 'store_text': 'Um clique, com atualizações automáticas. Depois, fixe o ícone da extensão na barra.', 'store_btn': 'Adicionar pela Chrome Web Store',
+        'steps_label': 'A partir do código',
         'inst_steps': ['Transfira ou clone o <a href="{repo}">repositório</a>.', 'Abra <code>brave://extensions</code> ou <code>chrome://extensions</code>.', 'Ative o <strong>Modo de programador</strong>.', 'Clique em <strong>Carregar expandida</strong> e escolha a pasta.', 'Fixe o ícone da extensão na barra.'],
         'term_label': 'Pelo terminal', 'term_clone': '# clona o código', 'term_after': '# depois de alterar ficheiros:', 'term_reload': '# ↻ na extensão + recarregar o separador',
         'cfg_kicker': '// configuração', 'cfg_title': 'Regras por página',
@@ -211,9 +215,10 @@ T = {
         's1_t': 'Encuentra', 's1_p': 'El script se ejecuta en las páginas que añadiste y sigue el contenido que va llegando, como los mensajes nuevos de Discord.',
         's2_t': 'Sustituye', 's2_p': 'Cada coincidencia de una regla se convierte en un enlace <code>claude://code/new</code>, construido con el valor y la carpeta de la regla.',
         's3_t': 'Abre', 's3_p': 'El clic abre una sesión de Claude Desktop con el mensaje escrito. No se envía nada solo: lo revisas y pulsas Enter.',
-        'inst_kicker': '// instalación', 'inst_title': 'Cargar en el navegador',
-        'inst_sub': 'Mientras no esté en Chrome Web Store, la extensión se carga desde el código fuente.',
-        'steps_label': 'Paso a paso',
+        'inst_kicker': '// instalación', 'inst_title': 'Instalar',
+        'inst_sub': 'Instálala desde Chrome Web Store (funciona en Chrome, Brave y otros navegadores Chromium) o cárgala desde el código fuente.',
+        'store_label': 'Chrome Web Store · recomendado', 'store_text': 'Un clic, con actualizaciones automáticas. Después, fija el icono de la extensión en la barra.', 'store_btn': 'Añadir desde Chrome Web Store',
+        'steps_label': 'Desde el código fuente',
         'inst_steps': ['Descarga o clona el <a href="{repo}">repositorio</a>.', 'Abre <code>brave://extensions</code> o <code>chrome://extensions</code>.', 'Activa el <strong>Modo de desarrollador</strong>.', 'Haz clic en <strong>Cargar descomprimida</strong> y elige la carpeta.', 'Fija el icono de la extensión en la barra.'],
         'term_label': 'Desde la terminal', 'term_clone': '# clona el código', 'term_after': '# después de cambiar archivos:', 'term_reload': '# ↻ en la extensión + recargar la pestaña',
         'cfg_kicker': '// configuración', 'cfg_title': 'Reglas por página',
@@ -268,9 +273,10 @@ T = {
         's1_t': 'Trova', 's1_p': 'Lo script viene eseguito sulle pagine aggiunte e segue i contenuti che arrivano, come i nuovi messaggi di Discord.',
         's2_t': 'Sostituisce', 's2_p': 'Ogni corrispondenza di una regola diventa un link <code>claude://code/new</code>, costruito con il valore e la cartella della regola.',
         's3_t': 'Apre', 's3_p': 'Il clic apre una sessione di Claude Desktop con il messaggio scritto. Nulla viene inviato da solo: lo controlli e premi Invio.',
-        'inst_kicker': '// installazione', 'inst_title': 'Caricarla nel browser',
-        'inst_sub': 'Finché non è sul Chrome Web Store, l’estensione si carica dal codice sorgente.',
-        'steps_label': 'Passo dopo passo',
+        'inst_kicker': '// installazione', 'inst_title': 'Installala',
+        'inst_sub': 'Installala dal Chrome Web Store (funziona su Chrome, Brave e altri browser Chromium) o caricala dal codice sorgente.',
+        'store_label': 'Chrome Web Store · consigliato', 'store_text': 'Un clic, con aggiornamenti automatici. Poi fissa l’icona dell’estensione nella barra.', 'store_btn': 'Aggiungi dal Chrome Web Store',
+        'steps_label': 'Dal codice sorgente',
         'inst_steps': ['Scarica o clona il <a href="{repo}">repository</a>.', 'Apri <code>brave://extensions</code> o <code>chrome://extensions</code>.', 'Attiva la <strong>Modalità sviluppatore</strong>.', 'Clicca su <strong>Carica estensione non pacchettizzata</strong> e scegli la cartella.', 'Fissa l’icona dell’estensione nella barra.'],
         'term_label': 'Dal terminale', 'term_clone': '# clona il codice', 'term_after': '# dopo aver modificato i file:', 'term_reload': '# ↻ sull’estensione + ricarica la scheda',
         'cfg_kicker': '// configurazione', 'cfg_title': 'Regole per pagina',
@@ -363,7 +369,7 @@ INDEX = """<div class="hero">
     <p class="lead">{hero_lead}</p>
     <div class="actions">
       <a class="btn btn-contained" href="{repo}">{btn_github}</a>
-      <a class="btn btn-outlined" href="#install">{btn_install}</a>
+      <a class="btn btn-outlined" href="{store}">{btn_install}</a>
     </div>
   </div>
 </div>
@@ -405,7 +411,15 @@ INDEX = """<div class="hero">
       <p class="kicker">{inst_kicker}</p>
       <h2>{inst_title}</h2>
       <p class="section-sub">{inst_sub}</p>
-      <div class="two">
+      <div class="paper store-card">
+        <div>
+          <p class="label">{store_label}</p>
+          <div class="rule-line rule-after"></div>
+          <p>{store_text}</p>
+        </div>
+        <a class="btn btn-contained" href="{store}">{store_btn}</a>
+      </div>
+      <div class="two" style="margin-top:20px">
         <div class="paper">
           <p class="label">{steps_label}</p>
           <div class="rule-line rule-after"></div>
@@ -544,7 +558,7 @@ def render(code, page):
         for c in LANGS
     ) + f'\n<link rel="alternate" hreflang="x-default" href="{url_for("en", "" if page == "index" else file)}">'
 
-    t.update(repo=REPO)
+    t.update(repo=REPO, store=STORE)
     if page == 'index':
         t['inst_list'] = ''.join(f'<li>{s.format(repo=REPO)}</li>' for s in t['inst_steps'])
         t['ex_regex_html'] = escape(t['ex_regex'])

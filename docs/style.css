@@ -113,3 +113,9 @@
   .lang li a { display:block; padding:8px 16px; color:var(--bg-800); text-decoration:none; font-size:14px; }
   .lang li a:hover { background:var(--bg-50); }
   .lang li a[aria-current] { font-weight:700; color:var(--bg-900); }
+
+  /* Card da Chrome Web Store na instalação */
+  .store-card { display:flex; align-items:center; gap:24px; justify-content:space-between; }
+  .store-card > div { flex:1; min-width:0; }
+  .store-card p:last-child { margin:0; }
+  @media (max-width: 760px) { .store-card { flex-direction:column; align-items:stretch; } }

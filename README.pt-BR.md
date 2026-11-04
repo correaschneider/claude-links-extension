@@ -29,6 +29,12 @@ mensagem **não é enviada sozinha**: você confere e aperta Enter.
 
 ## Instalação
 
+**Chrome Web Store (recomendado):** [adicione a Claude Links](https://chromewebstore.google.com/detail/claude-links/lphafilnbkkfemcmibdbigaopjnbdell) e fixe
+o ícone na barra. Funciona no Chrome, no Brave e em outros navegadores
+Chromium, com atualização automática.
+
+**A partir do código:**
+
 1. Abra `brave://extensions` (ou `chrome://extensions`).
 2. Ative o **Modo de desenvolvedor**.
 3. Clique em **Carregar sem compactação** e escolha esta pasta.

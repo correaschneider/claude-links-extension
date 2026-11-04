@@ -28,6 +28,12 @@ with "Run the skill triage on TASK-123" in the message box. The message is
 
 ## Installation
 
+**Chrome Web Store (recommended):** [add Claude Links](https://chromewebstore.google.com/detail/claude-links/lphafilnbkkfemcmibdbigaopjnbdell), then pin the
+icon to the toolbar. Works in Chrome, Brave and other Chromium browsers, with
+automatic updates.
+
+**From the source code:**
+
 1. Open `brave://extensions` (or `chrome://extensions`).
 2. Turn on **Developer mode**.
 3. Click **Load unpacked** and pick this folder.
